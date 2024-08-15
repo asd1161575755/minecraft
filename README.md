@@ -58,7 +58,7 @@ ENV JVM_OPTS="\
 -XX:+AggressiveOpts \
 -XX:CICompilerCount=2 \
 -XX:+TieredCompilation \
--XX:TieredStopAtLevel=3 \
+-XX:TieredStopAtLevel=4 \
 -XX:MetaspaceSize=128M \
 -XX:MaxMetaspaceSize=256M \
 -XX:CompileThreshold=15000 \
