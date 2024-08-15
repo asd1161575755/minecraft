@@ -66,3 +66,13 @@ RUN ln -sf /usr/share/zoneinfo/$TZ /etc/localtime \
 ENTRYPOINT ["sh", "-c", "java -jar ${JVM_OPTS} server.jar --nogui --eraseCache --forceUpgrade --universe /data/"]
 ```
 - docker build -t minecraft-server .
+
+### 编写server.properties文件
+...
+
+### 必要插件与模组
+...
+
+### 其他
+...
+
