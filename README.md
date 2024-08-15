@@ -31,8 +31,10 @@ ENV JVM_OPTS="\
 -server \
 -Xms1G \
 -Xmx2G \
+-Xshare:auto \
 -XX:+UseTLAB \
--XX:UseAVX=2 \
+-XX:+UseFMA \
+-XX:UseAVX=3 \
 -XX:+UseG1GC \
 -Duser.timezone=GMT+8 \
 -Dfile.encoding=UTF-8 \
@@ -54,6 +56,11 @@ ENV JVM_OPTS="\
 -XX:G1MixedGCCountTarget=4 \
 -XX:MetaspaceSize=128M \
 -XX:MaxMetaspaceSize=256M \
+-Djava.awt.headless=true \
+-XX:+AggressiveOpts \
+-XX:+TieredCompilation \
+-XX:TieredStopAtLevel=1 \
+-XX:CompileThreshold=10000 \
 -Djava.net.preferIPv4Stack=true \
 -Djdk.virtualThreadEnable=true \
 -Djdk.attach.allowAttachSelf \
