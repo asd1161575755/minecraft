@@ -128,6 +128,8 @@ prevent-proxy-connections=true
 ## 强制启用服务器资源包
 require-resource-pack=true
 ## rcon
+# 开启RCON远程访问
+enable-rcon=true
 # RCON远程访问端口
 rcon.port=25575
 # RCON远程访问密码
