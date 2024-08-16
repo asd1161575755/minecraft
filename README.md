@@ -80,67 +80,52 @@ ENTRYPOINT ["sh", "-c", "java -jar ${JVM_OPTS} server.jar --nogui --eraseCache -
 
 ### 编写server.properties文件
 [properties](https://minecraft.fandom.com/zh/wiki/Server.properties)
-<syntaxhighlight lang="properties">
-#Minecraft server properties
-#（文件修改时间戳）
-enable-jmx-monitoring=false
-rcon.port=25575
-level-seed=
-gamemode=survival
-enable-command-block=false
-enable-query=false
-generator-settings={}
-enforce-secure-profile=false
+
+```properties
+## 不公开服务器
+public=false
+## 服务器信息
+motd=§4§lMinecraft §6§l Server
+## 世界名称
 level-name=world
-motd=A Minecraft Server
-query.port=25565
+## 世界类型
+# minecraft:normal - 带有丘陵、河谷、海洋等的标准的世界。
+# minecraft:flat - 一个没有特性的平坦世界，可用generator-settings修改。
+# minecraft:large_biomes - 如同默认的世界，但所有生物群系都更大。
+# minecraft:amplified - 如同默认的世界，但世界生成高度提高。
+# minecraft:single_biome_surface - 单一生物群系世界
+level-type=minecraft:large_biomes
+## 游戏难度
+# peaceful (0) - 和平
+# easy (1) - 简单
+# normal (2) - 普通
+# hard (3) - 困难
+difficulty=hard
+## 游戏模式
+# survival (0) - 生存模式
+# creative (1) - 创造模式
+# adventure (2) - 冒险模式
+# spectator (3) - 旁观模式
+gamemode=survival
+# 最大人数
+max-players=10
+## 可建造最大高度
+max-build-height=200
+## 玩家可以互相伤害
 pvp=true
-generate-structures=true
-max-chained-neighbor-updates=1000000
-difficulty=easy
-network-compression-threshold=256
-max-tick-time=60000
-require-resource-pack=false
-use-native-transport=true
-max-players=20
+## 启用命令方块
+enable-command-block=true
+## 服务器不会尝试检查玩家
 online-mode=false
-enable-status=true
-allow-flight=false
-initial-disabled-packs=
-broadcast-rcon-to-ops=true
-view-distance=10
-server-ip=
-resource-pack-prompt=
-allow-nether=true
-server-port=25565
-enable-rcon=false
-sync-chunk-writes=true
-op-permission-level=4
-prevent-proxy-connections=false
-hide-online-players=false
-resource-pack=
-entity-broadcast-range-percentage=100
-simulation-distance=10
-rcon.password=
-player-idle-timeout=0
-force-gamemode=false
-rate-limit=0
-hardcore=false
-white-list=false
-broadcast-console-to-ops=true
-spawn-npcs=true
-spawn-animals=true
-log-ips=true
-function-permission-level=2
-initial-enabled-packs=vanilla
-level-type=minecraft\:normal
-text-filtering-config=
-spawn-monsters=true
-enforce-whitelist=false
-spawn-protection=16
-resource-pack-sha1=
-max-world-size=29999984
-</syntaxhighlight>
+## 不具有Mojang签名的公钥的玩家也可进入服务器
+enforce-secure-profile=false
+## 服务器将会禁止玩家使用虚拟专用网络或代理
+prevent-proxy-connections=true
+## 强制启用服务器资源包
+require-resource-pack=true
+## 允许OP在服务器人满时也能加入游戏
+admin-slot=true
+```
 
 ### 必要插件与模组
 ...
