@@ -131,7 +131,7 @@ require-resource-pack=true
 # RCON远程访问端口
 rcon.port=25575
 # RCON远程访问密码
-rcon.password=
+rcon.password=yVsWYYc7EOxTshngbtBqJvKbPSujLH
 ```
 
 ### 必要插件与模组
