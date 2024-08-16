@@ -86,7 +86,7 @@ ENTRYPOINT ["sh", "-c", "java -jar ${JVM_OPTS} server.jar --nogui --eraseCache -
 public=false
 ## 服务器端口
 server-port=25565
-## 服务器信息[unicode](https://tool.chinaz.com/tools/unicode.aspx)
+## 服务器信息 https://tool.chinaz.com/tools/unicode.aspx
 motd=§4§lMinecraft §6§l Server
 ## 世界名称
 level-name=world
