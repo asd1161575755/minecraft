@@ -113,6 +113,8 @@ max-players=10
 max-build-height=200
 ## 玩家可以互相伤害
 pvp=true
+## 允许OP在服务器人满时也能加入游戏
+admin-slot=true
 ## 启用命令方块
 enable-command-block=true
 ## 服务器不会尝试检查玩家
@@ -123,8 +125,6 @@ enforce-secure-profile=false
 prevent-proxy-connections=true
 ## 强制启用服务器资源包
 require-resource-pack=true
-## 允许OP在服务器人满时也能加入游戏
-admin-slot=true
 ```
 
 ### 必要插件与模组
