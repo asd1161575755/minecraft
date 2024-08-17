@@ -49,6 +49,10 @@ jobs:
       run: |
         echo "LATEST_VERSION: ${{ env.LATEST_VERSION }}"
         echo "SERVER_URL: ${{ env.SERVER_URL }}"
+
+    - name: 下载 server.jar
+      run: |
+        curl -fSL -o server.jar "$SERVER_URL"
     
     # Step 6: 为多种架构构建和推送Docker镜像
     - name: Build and push Docker image
@@ -58,5 +62,3 @@ jobs:
         push: true
         tags: minecraft-server:${{ env.LATEST_VERSION }}
         platforms: linux/amd64,linux/arm64
-        build-args: |
-          SERVER_URL=${{ env.SERVER_URL }}
