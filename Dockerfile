@@ -4,9 +4,9 @@ WORKDIR server
 
 Expose 25565
 
-COPY server.jar .
 COPY server.properties .
 RUN echo "eula=true" > eula.txt
+RUN wget -O server.jar $SERVER_URL
 
 # JVM针对2C2G机器
 ENV JVM_OPTS="\
