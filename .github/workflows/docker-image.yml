@@ -42,7 +42,7 @@ jobs:
     - name: Fetch server.jar download URL
       id: server_download_url
       run: |
-        SERVER_JSON_URL=$(curl -s $VERSION_URL | jq -r '.downloads.server.url')
+        SERVER_URL=$(curl -s $VERSION_URL | jq -r '.downloads.server.url')
         echo "SERVER_JSON_URL=$SERVER_JSON_URL" >> $GITHUB_ENV
 
     - name: 打印重要环境变量
