@@ -4,9 +4,10 @@ WORKDIR server
 
 Expose 25565
 
+ARG SERVER_URL
 COPY server.properties .
 RUN echo "eula=true" > eula.txt
-RUN curl -o server.jar $SERVER_URL
+RUN curl -fSL -o server.jar "$SERVER_URL"
 
 # JVM针对2C2G机器
 ENV JVM_OPTS="\
