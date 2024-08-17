@@ -23,7 +23,8 @@ WORKDIR server
 Expose 25565
 
 COPY server.jar .
-# ADD https://piston-data.mojang.com/v1/objects/59353fb40c36d304f2035d51e7d6e6baa98dc05c/server.jar .
+COPY server.properties .
+RUN echo "eula=true" > eula.txt
 
 # JVM针对2C2G机器
 ENV JVM_OPTS="\
@@ -32,9 +33,9 @@ ENV JVM_OPTS="\
 -Xmx2G \
 -Xshare:auto \
 -XX:+UseTLAB \
--XX:+UseFMA \
--XX:UseAVX=3 \
 -XX:+UseG1GC \
+-Duser.language=zh \
+-Duser.country=CN \
 -Duser.timezone=GMT+8 \
 -Dfile.encoding=UTF-8 \
 -XX:MaxGCPauseMillis=100 \
@@ -54,7 +55,6 @@ ENV JVM_OPTS="\
 -XX:MaxTenuringThreshold=1 \
 -XX:G1MixedGCCountTarget=4 \
 -Djava.awt.headless=true \
--XX:+AggressiveOpts \
 -XX:CICompilerCount=2 \
 -XX:+TieredCompilation \
 -XX:TieredStopAtLevel=4 \
@@ -73,7 +73,7 @@ ENV JVM_OPTS="\
 RUN ln -sf /usr/share/zoneinfo/$TZ /etc/localtime \
     && echo $TZ > /etc/timezone
 
-ENTRYPOINT ["sh", "-c", "java -jar ${JVM_OPTS} server.jar --nogui --eraseCache --forceUpgrade --optimize --universe /data/"]
+ENTRYPOINT ["sh", "-c", "java -jar ${JVM_OPTS} server.jar --nogui --eraseCache --forceUpgrade --universe /data/"]
 ```
 - docker build -t minecraft-server .
 - docker run -d -v /data/:/data/ -p 25565:25565 -p 25575:25575 minecraft-server
