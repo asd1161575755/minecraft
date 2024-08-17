@@ -43,7 +43,7 @@ jobs:
       id: server_download_url
       run: |
         SERVER_URL=$(curl -s $VERSION_URL | jq -r '.downloads.server.url')
-        echo "SERVER_JSON_URL=$SERVER_JSON_URL" >> $GITHUB_ENV
+        echo "SERVER_URL=$SERVER_URL" >> $GITHUB_ENV
 
     - name: 打印重要环境变量
       run: |
