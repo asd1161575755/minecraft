@@ -20,7 +20,7 @@
 - docker run -d -v /data/:/data/ -p 25565:25565 -p 25575:25575 minecraft-server
 
 ### 编写server.properties文件
-- [properties](https://minecraft.fandom.com/zh/wiki/Server.properties)
+- [properties详解](https://minecraft.fandom.com/zh/wiki/Server.properties)
 - [server.properties](server.properties)
 
 ### Rcon管理器
