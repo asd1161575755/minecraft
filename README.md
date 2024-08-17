@@ -179,5 +179,5 @@ rcon.password=yVsWYYc7EOxTshngbtBqJvKbPSujLH
 - LuckPerms https://modrinth.com/mod/luckperms
 
 ### 其他
-...
+- [客户端](https://ci.huangyuhui.net/job/HMCL/)
 
