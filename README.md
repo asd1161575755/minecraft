@@ -76,6 +76,7 @@ RUN ln -sf /usr/share/zoneinfo/$TZ /etc/localtime \
 ENTRYPOINT ["sh", "-c", "java -jar ${JVM_OPTS} server.jar --nogui --eraseCache --forceUpgrade --optimize --universe /data/"]
 ```
 - docker build -t minecraft-server .
+- docker run -d -v /data/:/data/ -p 25565:25565 -p 25575:25575 minecraft-server
 
 ### 编写server.properties文件
 [properties](https://minecraft.fandom.com/zh/wiki/Server.properties)
