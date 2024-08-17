@@ -136,6 +136,9 @@ rcon.port=25575
 rcon.password=yVsWYYc7EOxTshngbtBqJvKbPSujLH
 ```
 
+### Rcon管理器
+- https://github.com/zkhssb/NectarRCON
+
 ### 必要插件与模组
 
 #### **1. 基础性能优化组合**
