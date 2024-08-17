@@ -47,8 +47,8 @@ jobs:
 
     - name: 打印重要环境变量
       run: |
-        echo "LATEST_VERSION: ${{ env.LATEST_VERSION }}"
-        echo "SERVER_URL: ${{ env.SERVER_URL }}"
+        echo "下载版本: ${{ env.LATEST_VERSION }}"
+        echo "下载地址: ${{ env.SERVER_URL }}"
 
     - name: 下载 server.jar
       run: |
@@ -60,5 +60,5 @@ jobs:
       with:
         context: .
         push: true
-        tags: minecraft-server:${{ env.LATEST_VERSION }}
+        tags: fc6a1b03/minecraft-server:${{ env.LATEST_VERSION }}
         platforms: linux/amd64,linux/arm64
