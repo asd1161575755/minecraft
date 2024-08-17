@@ -1,0 +1,57 @@
+name: Minecraft Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    # Step 1: 设置Docker Buildx
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
+    # Step 2: 为多平台构建安装QEMU
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v3
+
+    # Step 3: 登录Docker Hub
+    - name: Login to Docker Hub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
+    # Step 4: 获取最新的Minecraft版本信息
+    - name: Fetch latest Minecraft version info
+      id: version_info
+      run: |
+        VERSION_MANIFEST_URL="https://launchermeta.mojang.com/mc/game/version_manifest.json"
+        LATEST_VERSION=$(curl -s $VERSION_MANIFEST_URL | jq -r '.versions[] | select(.type=="release") | .id' | head -n 1)
+        VERSION_URL=$(curl -s $VERSION_MANIFEST_URL | jq -r --arg LATEST_VERSION "$LATEST_VERSION" '.versions[] | select(.id==$LATEST_VERSION and .type=="release") | .url')
+        echo "LATEST_VERSION=$LATEST_VERSION" >> $GITHUB_ENV
+        echo "VERSION_URL=$VERSION_URL" >> $GITHUB_ENV
+
+    # Step 5: 获取server.jar下载URL
+    - name: Fetch server.jar download URL
+      id: server_download_url
+      run: |
+        SERVER_JSON_URL=$(curl -s $VERSION_URL | jq -r '.downloads.server.url')
+        echo "SERVER_JSON_URL=$SERVER_JSON_URL" >> $GITHUB_ENV
+
+    # Step 6: 为多种架构构建和推送Docker镜像
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        push: true
+        tags: minecraft-server:$LATEST_VERSION
+        platforms: linux/amd64,linux/arm64
+        build-args: |
+          SERVER_URL=$SERVER_JSON_URL
