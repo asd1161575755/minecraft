@@ -53,8 +53,20 @@ jobs:
     - name: 下载 server.jar
       run: |
         curl -fSL -o server.jar "$SERVER_URL"
+
+    # Step 6: 生成随机RCON密码
+    - name: Generate random RCON password
+      id: generate_password
+      run: |
+        RCON_PASSWORD=$(openssl rand -base64 30 | tr -dc 'A-Za-z0-9' | head -c 30)
+        echo "RCON_PASSWORD=$RCON_PASSWORD" >> $GITHUB_ENV
+
+    # Step 7: 将随机生成的密码写入 server.properties
+    - name: Update server.properties with RCON password
+      run: |
+        echo "rcon.password=${{ env.RCON_PASSWORD }}" >> server.properties
     
-    # Step 6: 为多种架构构建和推送Docker镜像
+    # Step 8: 为多种架构构建和推送Docker镜像
     - name: Build and push Docker image
       uses: docker/build-push-action@v5
       with:
