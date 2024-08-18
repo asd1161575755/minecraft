@@ -38,13 +38,15 @@ jobs:
     - name: Fetch Minecraft version info
       id: version_info
       run: |
+        # Minecraft版本信息地址
+        VERSION_MANIFEST_URL="https://launchermeta.mojang.com/mc/game/version_manifest.json"
         if [ -n "${{ github.event.inputs.LATEST_VERSION }}" ]; then
           # 使用手动指定的版本
           LATEST_VERSION=${{ github.event.inputs.LATEST_VERSION }}
-          VERSION_URL="https://launchermeta.mojang.com/mc/game/version_manifest.json"
+          VERSION_URL=$(curl -s $VERSION_MANIFEST_URL | jq -r --arg LATEST_VERSION "$LATEST_VERSION" '.versions[] | select(.id==$LATEST_VERSION and .type=="release") | .url')
+          echo "VERSION_URL=$VERSION_URL" >> $GITHUB_ENV
         else
           # 自动获取最新版本信息
-          VERSION_MANIFEST_URL="https://launchermeta.mojang.com/mc/game/version_manifest.json"
           LATEST_VERSION=$(curl -s $VERSION_MANIFEST_URL | jq -r '.versions[] | select(.type=="release") | .id' | head -n 1)
           VERSION_URL=$(curl -s $VERSION_MANIFEST_URL | jq -r --arg LATEST_VERSION "$LATEST_VERSION" '.versions[] | select(.id==$LATEST_VERSION and .type=="release") | .url')
           echo "VERSION_URL=$VERSION_URL" >> $GITHUB_ENV
