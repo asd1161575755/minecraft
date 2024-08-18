@@ -34,7 +34,7 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
- # Step 4: 获取最新的Minecraft版本信息
+    # Step 4: 获取最新的Minecraft版本信息
     - name: Fetch Minecraft version info
       id: version_info
       run: |
@@ -55,29 +55,27 @@ jobs:
     - name: Check if version is updated
       id: check_version
       run: |
-        if [ "$github.event.inputs.LATEST_VERSION == ''" ]; then
+        # 检查是否手动输入了 LATEST_VERSION
+        if [ -z "${{ github.event.inputs.LATEST_VERSION }}" ]; then
+          # 尝试从`last_built_version.txt`中获取版本号
           if [ -f last_built_version.txt ]; then
             LAST_BUILT_VERSION=$(cat last_built_version.txt)
-            echo "Last built version: $LAST_BUILT_VERSION"
           else
-            echo "No previous version found. Continuing with the build."
             LAST_BUILT_VERSION="none"
           fi
-          echo "Latest version: $LATEST_VERSION"
+          # 检查是否需要继续构建
           if [ "$LAST_BUILT_VERSION" = "none" ]; then
             # 没有旧版本时继续构建
             echo "BUILD_NEEDED=true" >> $GITHUB_ENV
           elif [ "$LATEST_VERSION" \> "$LAST_BUILT_VERSION" ]; then
             # 如果新版本大于旧版本则继续构建
-            echo "New version detected: $LATEST_VERSION"
             echo "BUILD_NEEDED=true" >> $GITHUB_ENV
           else
             # 如果新版本不大于旧版本则跳过构建
-            echo "No new version. Skipping build."
             echo "BUILD_NEEDED=false" >> $GITHUB_ENV
           fi
         else
-          # 手动输入版本则跳过构建
+          # 手动输入版本则直接构建
           echo "BUILD_NEEDED=true" >> $GITHUB_ENV
         fi
 
