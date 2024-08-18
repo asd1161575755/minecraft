@@ -3,7 +3,7 @@ name: Minecraft Docker Image CI
 # 触发配置
 on:
   schedule:
-    - cron: '0 0 * * 5' 
+    - cron: '0 0 */3 * *'
   workflow_dispatch:
 
 jobs:
