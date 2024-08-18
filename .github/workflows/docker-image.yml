@@ -89,7 +89,7 @@ jobs:
     - name: Update server.properties with RCON password
       if: env.BUILD_NEEDED == 'true'
       run: |
-        echo "rcon.password=${{ env.RCON_PASSWORD }}" >> server.properties
+        sed -i '/^rcon.password=/c\rcon.password=${{ env.RCON_PASSWORD }}' server.properties
     
     # Step 10: 为多种架构构建和推送Docker镜像
     - name: Build and push Docker image
