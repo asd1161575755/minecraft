@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       LATEST_VERSION:
-        description: '要构建的Minecraft版本（覆盖自动版本获取）'
+        description: '要构建的Minecraft版本；只打版本镜像且会跳过第12步'
         required: false
         default: ''
         type: string
@@ -103,21 +103,28 @@ jobs:
       if: env.BUILD_NEEDED == 'true'
       run: |
         sed -i '/^rcon.password=/c\rcon.password=${{ env.RCON_PASSWORD }}' server.properties
+
+    # Step 10: 准备 Docker 镜像标签
+    - name: Prepare Docker tags
+      id: prepare_tags
+      run: |
+        if [ -n "${{ github.event.inputs.LATEST_VERSION }}" ]; then
+          echo "TAGS=fc6a1b03/minecraft-server:${{ github.event.inputs.LATEST_VERSION }}" >> $GITHUB_ENV
+        else
+          echo "TAGS=fc6a1b03/minecraft-server:latest,fc6a1b03/minecraft-server:${{ env.LATEST_VERSION }}" >> $GITHUB_ENV
+        fi
     
-    # Step 10: 为多种架构构建和推送Docker镜像
+    # Step 11: 为多种架构构建和推送Docker镜像
     - name: Build and push Docker image
       if: env.BUILD_NEEDED == 'true'
-      id: build_and_push
       uses: docker/build-push-action@v5
       with:
         context: .
         push: true
-        tags: |
-          fc6a1b03/minecraft-server:${{ env.LATEST_VERSION }}
-          ${{ if eq(github.event.inputs.LATEST_VERSION, '') }}fc6a1b03/minecraft-server:latest${{ endif }}
+        tags: ${{ env.TAGS }}
         platforms: linux/amd64,linux/arm64
 
-    # Step 11: 更新记录的最后构建版本
+    # Step 12: 更新记录的最后构建版本
     - name: Update last built version
       if: env.BUILD_NEEDED == 'true' && github.event.inputs.LATEST_VERSION == ''
       run: |
