@@ -42,15 +42,26 @@ jobs:
     - name: Check if version is updated
       id: check_version
       run: |
-        LAST_BUILT_VERSION=$(cat last_built_version.txt 2>/dev/null || echo "none")
-        echo "Last built version: $LAST_BUILT_VERSION"
+        if [ -f last_built_version.txt ]; then
+          LAST_BUILT_VERSION=$(cat last_built_version.txt)
+          echo "Last built version: $LAST_BUILT_VERSION"
+        else
+          echo "No previous version found. Continuing with the build."
+          LAST_BUILT_VERSION="none"
+        fi
         echo "Latest version: $LATEST_VERSION"
-        if [ "$LATEST_VERSION" != "$LAST_BUILT_VERSION" ]; then
+        if [ "$LAST_BUILT_VERSION" = "none" ]; then
+          # 没有旧版本时继续构建
+          echo "BUILD_NEEDED=true" >> $GITHUB_ENV
+        elif [ "$LATEST_VERSION" \> "$LAST_BUILT_VERSION" ]; then
+          # 如果新版本大于旧版本则继续构建
           echo "New version detected: $LATEST_VERSION"
           echo "BUILD_NEEDED=true" >> $GITHUB_ENV
         else
+          # 如果新版本不大于旧版本则跳过构建
           echo "No new version. Skipping build."
           echo "BUILD_NEEDED=false" >> $GITHUB_ENV
+        fi
 
     # Step 6: 获取server.jar下载URL
     - name: Fetch server.jar download URL
