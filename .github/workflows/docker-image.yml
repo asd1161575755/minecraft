@@ -1,10 +1,9 @@
 name: Minecraft Docker Image CI
 
+# 触发配置
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+  schedule:
+    - cron: '0 0 * * 5' # 每周五00:00运行
 
 jobs:
   build:
@@ -38,35 +37,65 @@ jobs:
         echo "LATEST_VERSION=$LATEST_VERSION" >> $GITHUB_ENV
         echo "VERSION_URL=$VERSION_URL" >> $GITHUB_ENV
 
-    # Step 5: 获取server.jar下载URL
+    # Step 5: 检查版本是否更新
+    - name: Check if version is updated
+      id: check_version
+      run: |
+        LAST_BUILT_VERSION=$(cat last_built_version.txt 2>/dev/null || echo "none")
+        echo "Last built version: $LAST_BUILT_VERSION"
+        echo "Latest version: $LATEST_VERSION"
+        if [ "$LATEST_VERSION" != "$LAST_BUILT_VERSION" ]; then
+          echo "New version detected: $LATEST_VERSION"
+          echo "BUILD_NEEDED=true" >> $GITHUB_ENV
+        else
+          echo "No new version. Skipping build."
+          echo "BUILD_NEEDED=false" >> $GITHUB_ENV
+
+    # Step 6: 获取server.jar下载URL
     - name: Fetch server.jar download URL
       id: server_download_url
+      if: env.BUILD_NEEDED == 'true'
       run: |
         SERVER_URL=$(curl -s $VERSION_URL | jq -r '.downloads.server.url')
         echo "SERVER_URL=$SERVER_URL" >> $GITHUB_ENV
 
-    # Step 6: 下载 server.jar
+    # Step 7: 下载 server.jar
     - name: Download server.jar
+      if: env.BUILD_NEEDED == 'true'
       run: |
         curl -fSL -o server.jar "$SERVER_URL"
 
-    # Step 7: 生成随机RCON密码
+    # Step 8: 生成随机RCON密码
     - name: Generate random RCON password
+      if: env.BUILD_NEEDED == 'true'
       id: generate_password
       run: |
         RCON_PASSWORD=$(openssl rand -base64 30 | tr -dc 'A-Za-z0-9' | head -c 30)
         echo "RCON_PASSWORD=$RCON_PASSWORD" >> $GITHUB_ENV
 
-    # Step 8: 将随机生成的密码写入 server.properties
+    # Step 9: 将随机生成的密码写入 server.properties
     - name: Update server.properties with RCON password
+      if: env.BUILD_NEEDED == 'true'
       run: |
         echo "rcon.password=${{ env.RCON_PASSWORD }}" >> server.properties
     
-    # Step 9: 为多种架构构建和推送Docker镜像
+    # Step 10: 为多种架构构建和推送Docker镜像
     - name: Build and push Docker image
+      if: env.BUILD_NEEDED == 'true'
       uses: docker/build-push-action@v5
       with:
         context: .
         push: true
         tags: fc6a1b03/minecraft-server:${{ env.LATEST_VERSION }}
         platforms: linux/amd64,linux/arm64
+
+    # Step 11: 更新记录的最后构建版本
+    - name: Update last built version
+      if: env.BUILD_NEEDED == 'true'
+      run: |
+        echo $LATEST_VERSION > last_built_version.txt
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
+        git add last_built_version.txt
+        git commit -m "Update last built version to $LATEST_VERSION"
+        git push --force
