@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       LATEST_VERSION:
-        description: '要构建的Minecraft版本；只打版本镜像且会跳过第12步'
+        description: '要构建的Minecraft版本；只打版本镜像且会跳过`记录最后构建版本`'
         required: false
         default: ''
         type: string
