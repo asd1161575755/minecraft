@@ -78,7 +78,7 @@ jobs:
           fi
         else
           # 手动输入版本则跳过构建
-          echo "BUILD_NEEDED=false" >> $GITHUB_ENV
+          echo "BUILD_NEEDED=true" >> $GITHUB_ENV
         fi
 
     # Step 6: 获取server.jar下载URL
@@ -112,6 +112,7 @@ jobs:
     # Step 10: 准备 Docker 镜像标签
     - name: Prepare Docker tags
       id: prepare_tags
+      if: env.BUILD_NEEDED == 'true'
       run: |
         if [ -n "${{ github.event.inputs.LATEST_VERSION }}" ]; then
           echo "TAGS=fc6a1b03/minecraft-server:${{ github.event.inputs.LATEST_VERSION }}" >> $GITHUB_ENV
