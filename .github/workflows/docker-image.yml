@@ -106,8 +106,10 @@ jobs:
       if: env.BUILD_NEEDED == 'true'
       run: |
         echo $LATEST_VERSION > last_built_version.txt
-        git config --local user.email "github-actions[bot]@users.noreply.github.com"
-        git config --local user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git config --global user.name "github-actions[bot]"
         git add last_built_version.txt
         git commit -m "Update last built version to $LATEST_VERSION"
         git push --force
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
