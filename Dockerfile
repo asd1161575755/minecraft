@@ -1,10 +1,20 @@
-FROM eclipse-temurin:21-jre
-
+FROM eclipse-temurin:21-jre as builder
 WORKDIR server
 
-Expose 25565
+COPY *.jar fabric-server.jar
+RUN java -jar fabric-server.jar --nogui --universe /now/data/
 
-COPY server.jar .
+################################
+
+FROM eclipse-temurin:21-jre
+Expose 25565
+WORKDIR server
+
+# 处理编译文件
+COPY --from=builder server .
+RUN rm -rf .fabric server.properties eula.txt logs/* 
+
+# 覆盖项目的文件
 COPY server.properties .
 RUN echo "eula=true" > eula.txt
 
@@ -55,4 +65,4 @@ ENV JVM_OPTS="\
 RUN ln -sf /usr/share/zoneinfo/$TZ /etc/localtime \
     && echo $TZ > /etc/timezone
 
-ENTRYPOINT ["sh", "-c", "java -jar ${JVM_OPTS} server.jar --nogui --eraseCache --forceUpgrade --universe /data/"]
+ENTRYPOINT ["sh", "-c", "java -jar ${JVM_OPTS} fabric-server.jar --nogui --eraseCache --forceUpgrade --universe /data/"]
