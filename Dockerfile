@@ -3,8 +3,9 @@ WORKDIR server
 
 COPY fabric-server.jar fabric-server.jar
 RUN mkdir /temp/
+RUN mkdir /temp/
 RUN echo '#!/bin/bash\n\
-java -jar fabric-server.jar --nogui --universe /temp/cache/ > /temp/app.log 2>&1 &\n\
+java -jar fabric-server.jar --nogui --universe /temp/cache/ > >(tee /temp/app.log) 2>&1 &\n\
 PID=$!\n\
 tail -f /temp/app.log | while read LINE; do\n\
     echo "$LINE" | grep -q "Done"\n\
