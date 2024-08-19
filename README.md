@@ -1,34 +1,17 @@
 这个分支将会使用[Fabric](https://fabricmc.net/use/server/)作为模组插件
 
-### 获取`Server`文件
-1. 通过完整版本信息连接 [version_manifest](https://launchermeta.mojang.com/mc/game/version_manifest.json)
-2. 通过`JSONPath`过滤包类型
-    - 发行版表达式为：`$.versions[?(@.type=='release')]`
-       - 可通过`$.latest.release`确认最新的发行版本
-       - 结合表达式为：`$.versions[?(@.type=='release' && @.id=='1.21.1')]`
-    - 快照版表达式为：`$.versions[?(@.type=='snapshot')]`
-       - 可通过`$.latest.snapshot`确认最新的快照版本
-       - 结合表达式为：`$.versions[?(@.type=='release' && @.id=='1.21.1')]`
-    - 旧的Beta版表达式为：`$.versions[?(@.type=='old_beta')]`
-    - 旧的Alpha版表达式为：`$.versions[?(@.type=='old_alpha')]`
-3. 获取最新发行版本的下载地址
-    - 表达式为：`$.versions[?(@.type=='release' && @.id=='1.21.1')].url`
-    - 获取连接中的`JSON`信息并通过`JSONPath`过滤，表达式为：`$.downloads.server.url`
-    - 通过最后获得的连接发起请求即可获得需要的Server版本
-  
 ### 获取`Fabric`文件
 > [Fabric元数据](https://meta.fabricmc.net/)
+> `Fabric`会自动下载指定版本的`Server`文件
 1. 通过完整版本信息连接 [version_fabric](https://meta.fabricmc.net/v2/versions/)
 2. 通过`JSONPath`过滤类型
+   - 获取`server_version`，具体表达式为：`$.game[?(@.stable==true)].version[0]`
    - 获取`fabric_loader_version`，具体表达式为：`$.loader[?(@.stable==true)].version`
    - 获取`fabric_installer_version`，具体表达式为：`$.installer[?(@.stable==true)].version`
-3. 组合完整`Fabric`下载连接：https://meta.fabricmc.net/v2/versions/loader/{server_version}/{fabric_loader_version}/{fabric_installer_version}/server/jar
-    - {server_version} `ManifestServer版本号`
-    - {fabric_loader_version} `FabricLoader版本号`
-    - {fabric_installer_version} `FabricInstaller版本号`
-4. 获取`fabric-api`模组放置在`mods`中
+4. 组合完整`Fabric`下载连接：https://meta.fabricmc.net/v2/versions/loader/{server_version}/{fabric_loader_version}/{fabric_installer_version}/server/jar
+5. 获取`fabric-api`模组放置在`mods`中
    - 1
-5. 请求完整`Fabric`下载连接即可获得对应`Server`版本最新的`Fabric`插件包
+6. 请求完整`Fabric`下载连接即可获得对应`Server`版本最新的`Fabric`插件包
    - 需要将`fabric-server-mc.{server_version}-loader.{fabric_loader_version}-launcher.{server_version}.jar`放置于`server.jar`同级目录下
    - 启动命令，需要将`server.jar`替换为`fabric-server-mc.{server_version}-loader.{fabric_loader_version}-launcher.{server_version}.jar`即可 
    
