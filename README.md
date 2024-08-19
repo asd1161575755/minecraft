@@ -17,17 +17,18 @@
     - 通过最后获得的连接发起请求即可获得需要的Server版本
   
 ### 获取`Fabric`文件
-> [Fabric源数据](https://meta.fabricmc.net/)
-1. 通过对应`Server`版本信息连接：https://meta.fabricmc.net/v2/versions/loader/{version} `其中{version}需要替换为上一步Server的版本号`
-2. 通过`JSONPath`过滤获取最新的`FabricLoaderVersion`，具体表达式为：`$[?(@.loader.stable==true)].loader.version`
-3. 通过`JSONPath`过滤获取最新的[FabricInstaller](https://meta.fabricmc.net/v2/versions/installer)： 具体表达式为：`$[?(@.stable==true)].version`
-4. 组合完整`Fabric`下载连接：https://meta.fabricmc.net/v2/versions/loader/{server_version}/{fabric_loader_version}/{fabric_installer_version}/server/jar
+> [Fabric元数据](https://meta.fabricmc.net/)
+1. 通过完整版本信息连接 [version_fabric](https://meta.fabricmc.net/v2/versions/)
+2. 通过`JSONPath`过滤类型
+   - 获取`fabric_loader_version`，具体表达式为：`$.loader[?(@.stable==true)].version`
+   - 获取`fabric_installer_version`，具体表达式为：`$.installer[?(@.stable==true)].version`
+3. 组合完整`Fabric`下载连接：https://meta.fabricmc.net/v2/versions/loader/{server_version}/{fabric_loader_version}/{fabric_installer_version}/server/jar
     - {server_version} `ManifestServer版本号`
     - {fabric_loader_version} `FabricLoader版本号`
-    - {server_version} `FabricInstaller版本号`
-5. 获取`fabric-api`模组放置在`mods`中
+    - {fabric_installer_version} `FabricInstaller版本号`
+4. 获取`fabric-api`模组放置在`mods`中
    - 1
-7. 请求完整`Fabric`下载连接即可获得对应`Server`版本最新的`Fabric`插件包
+5. 请求完整`Fabric`下载连接即可获得对应`Server`版本最新的`Fabric`插件包
    - 需要将`fabric-server-mc.{server_version}-loader.{fabric_loader_version}-launcher.{server_version}.jar`放置于`server.jar`同级目录下
    - 启动命令，需要将`server.jar`替换为`fabric-server-mc.{server_version}-loader.{fabric_loader_version}-launcher.{server_version}.jar`即可 
    
