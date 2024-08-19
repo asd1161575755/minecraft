@@ -6,7 +6,7 @@
 > `Fabric`会自动下载指定版本的`Server`文件
 1. 通过完整版本信息连接 [version_fabric](https://meta.fabricmc.net/v2/versions/)
 2. 通过`JSONPath`过滤类型
-   - 获取`server_version`，具体表达式为：`$.game[?(@.stable==true)].version[0]`
+   - 获取`server_version`，具体表达式为：`$.game[?(@.stable==true)].version`，会得到一个版本集合，选择需要的即可
    - 获取`fabric_loader_version`，具体表达式为：`$.loader[?(@.stable==true)].version`
    - 获取`fabric_installer_version`，具体表达式为：`$.installer[?(@.stable==true)].version`
 4. 组合完整`Fabric`下载连接：https://meta.fabricmc.net/v2/versions/loader/{server_version}/{fabric_loader_version}/{fabric_installer_version}/server/jar
