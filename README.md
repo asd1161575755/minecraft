@@ -2,6 +2,7 @@
 
 ### 获取`Fabric`文件
 > [Fabric元数据](https://meta.fabricmc.net/)
+> 
 > `Fabric`会自动下载指定版本的`Server`文件
 1. 通过完整版本信息连接 [version_fabric](https://meta.fabricmc.net/v2/versions/)
 2. 通过`JSONPath`过滤类型
