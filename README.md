@@ -15,7 +15,19 @@
     - 表达式为：`$.versions[?(@.type=='release' && @.id=='1.21.1')].url`
     - 获取连接中的`JSON`信息并通过`JSONPath`过滤，表达式为：`$.downloads.server.url`
     - 通过最后获得的连接发起请求即可获得需要的Server版本
-
+  
+### 获取`Fabric`文件
+1. 通过对应`Server`版本信息连接：https://meta.fabricmc.net/v2/versions/loader/{version} `其中{version}需要替换为上一步Server的版本号`
+2. 通过`JSONPath`过滤获取最新的`FabricLoaderVersion`，具体表达式为：`$[?(@.loader.stable==true)].loader.version`
+3. 通过`FabricInstaller`安装版本信息连接：https://maven.fabricmc.net/net/fabricmc/fabric-installer/ `取其中最大版本号的名称`
+4. 组合完整`Fabric`下载连接：https://meta.fabricmc.net/v2/versions/loader/{server_version}/{fabric_loader_version}/{fabric_installer_version}/server/jar
+    - {server_version} `ManifestServer版本号`
+    - {fabric_loader_version} `FabricLoader版本号`
+    - {server_version} `FabricInstaller版本号`
+5. 请求完整`Fabric`下载连接即可获得对应`Server`版本最新的`Fabric`插件包
+   - 需要将`fabric-server-mc.{server_version}-loader.{fabric_loader_version}-launcher.{server_version}.jar`放置于`server.jar`同级目录下
+   - 启动服务时，需要将`server.jar`替换为`fabric-server-mc.{server_version}-loader.{fabric_loader_version}-launcher.{server_version}.jar`即可 
+   
 ### 制作Dockerfile
 - [Dockerfile](Dockerfile)
 - docker build -t minecraft-server .
