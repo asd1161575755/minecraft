@@ -1,3 +1,5 @@
+这个分支将会使用[Fabric](https://fabricmc.net/use/server/)作为模组插件
+
 ### 获取`Server`文件
 1. 通过完整版本信息连接 [version_manifest](https://launchermeta.mojang.com/mc/game/version_manifest.json)
 2. 通过`JSONPath`过滤包类型
