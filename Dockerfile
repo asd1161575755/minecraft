@@ -8,7 +8,7 @@ PID=$!\n\
 tail -f /temp/app.log | while read LINE; do\n\
     echo "$LINE" | grep -q "Done"\n\
     if [ $? -eq 0 ]; then\n\
-        kill $PID\n\
+        kill -SIGTERM $PID\n\
         echo "============`fabric`安装完成============"\n\
         exit 0\n\
     fi\n\
