@@ -12,7 +12,7 @@
 4. 组合完整`Fabric`下载连接：https://meta.fabricmc.net/v2/versions/loader/{server_version}/{fabric_loader_version}/{fabric_installer_version}/server/jar
 5. 获取`fabric-api`
    1. 通过完整版本信息连接 [version_fabric_api](https://api.github.com/repos/FabricMC/fabric/releases)
-   2. 获取`fabric-api`下载路径，具体表达式为：`$[?(@.target_commitish=='1.21.2')].assets.*.browser_download_url`
+   2. 获取`fabric-api`下载路径，具体表达式为：`$[?(@.target_commitish=='{server_version}')].assets.*.browser_download_url`，可能会有多个版本，取第一个最新的即可。
    3. 下载的模组`jar`文件放置在`mods`中即可
 6. 请求完整`Fabric`下载连接即可获得对应`Server`版本最新的`Fabric`插件包
    - 需要将`fabric-server-mc.{server_version}-loader.{fabric_loader_version}-launcher.{server_version}.jar`放置于`server.jar`同级目录下
