@@ -22,7 +22,7 @@ WORKDIR server
 COPY --from=builder server .
 RUN rm -rf server.properties eula.txt logs/*
 COPY server.properties .
-COPY fabric-api.jar mods
+COPY fabric-api.jar /public/
 RUN echo "eula=true" > eula.txt
 
 # JVM针对2C4G机器
@@ -72,4 +72,4 @@ RUN ln -sf /usr/share/zoneinfo/$TZ /etc/localtime \
     && echo $TZ > /etc/timezone
 
 Expose 25565
-ENTRYPOINT ["sh", "-c", "java -jar ${JVM_OPTS} fabric-server.jar --nogui --eraseCache --forceUpgrade --universe /data/"]
+ENTRYPOINT ["sh", "-c", "cp -r /public/* mods/ && java -jar ${JVM_OPTS} fabric-server.jar --nogui --eraseCache --forceUpgrade --universe /data/"]
