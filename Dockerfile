@@ -1,7 +1,7 @@
 FROM eclipse-temurin:21-jre as builder
 WORKDIR server
 
-COPY *.jar fabric-server.jar
+COPY fabric-server.jar fabric-server.jar
 RUN echo '#!/bin/bash\n\
 java -jar fabric-server.jar --nogui --universe /temp/cache/ > /temp/app.log 2>&1 &\n\
 PID=$!\n\
@@ -22,6 +22,7 @@ WORKDIR server
 COPY --from=builder server .
 RUN rm -rf server.properties eula.txt logs/*
 COPY server.properties .
+COPY fabric-api.jar mods
 RUN echo "eula=true" > eula.txt
 
 # JVM针对2C4G机器
