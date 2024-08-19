@@ -14,7 +14,7 @@ RUN rm -rf server.properties eula.txt logs/*
 COPY server.properties .
 RUN echo "eula=true" > eula.txt
 
-# JVM针对2C2G机器
+# JVM针对2C4G机器`待完善`
 ENV JVM_OPTS="\
 -server \
 -Xms1G \
