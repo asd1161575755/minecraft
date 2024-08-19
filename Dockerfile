@@ -2,6 +2,7 @@ FROM eclipse-temurin:21-jre as builder
 WORKDIR server
 
 COPY fabric-server.jar fabric-server.jar
+RUN mkdir /temp/
 RUN echo '#!/bin/bash\n\
 java -jar fabric-server.jar --nogui --universe /temp/cache/ > /temp/app.log 2>&1 &\n\
 PID=$!\n\
