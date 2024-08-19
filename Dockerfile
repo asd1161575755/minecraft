@@ -2,18 +2,8 @@ FROM eclipse-temurin:21-jre as builder
 WORKDIR server
 
 COPY fabric-server.jar fabric-server.jar
-RUN mkdir /temp/
-RUN echo '#!/bin/bash\n\
-java -jar fabric-server.jar --nogui --universe /temp/cache/ > >(tee /temp/app.log) 2>&1 &\n\
-PID=$!\n\
-tail -f /temp/app.log | while read LINE; do\n\
-    echo "$LINE" | grep -q "Done"\n\
-    if [ $? -eq 0 ]; then\n\
-        kill -SIGTERM $PID\n\
-        echo "============`fabric`安装完成============"\n\
-        exit 0\n\
-    fi\n\
-done' > build-server.sh && chmod +x build-server.sh && sh build-server.sh
+COPY build-server.sh build-server.sh
+RUN mkdir /temp/ && chmod +x build-server.sh && sh build-server.sh
 
 ################################
 
