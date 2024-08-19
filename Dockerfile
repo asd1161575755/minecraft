@@ -3,19 +3,7 @@ WORKDIR server
 
 RUN mkdir -p /temp/cache
 COPY fabric-server.jar fabric-server.jar
-RUN echo '#!/bin/bash\n\
-java -jar fabric-server.jar --nogui --universe /temp/cache/ > /temp/app.log 2>&1 &\n\
-PID=$!\n\
-tail -f /temp/app.log | while read LINE; do\n\
-    echo "$LINE"\n\
-    echo "$LINE" | grep -iq "done"\n\
-    if [ $? -eq 0 ]; then\n\
-        kill -SIGTERM $PID\n\
-        echo "============`fabric`安装完成============"\n\
-        exit 0\n\
-    fi\n\
-done\n\
-done' > build-server.sh && chmod +x build-server.sh && sh build-server.sh
+RUN java -jar fabric-server.jar --nogui --universe /temp/cache/
 
 ################################
 
