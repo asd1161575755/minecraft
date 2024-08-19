@@ -1,8 +1,8 @@
 FROM eclipse-temurin:21-jre as builder
 WORKDIR server
 
-COPY fabric-server.jar fabric-server.jar
 COPY build-server.sh build-server.sh
+COPY fabric-server.jar fabric-server.jar
 RUN mkdir /temp/ && chmod +x build-server.sh && sh build-server.sh
 
 ################################
