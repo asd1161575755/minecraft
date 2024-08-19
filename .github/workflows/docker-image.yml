@@ -100,8 +100,8 @@ jobs:
       run: |
         # 下载 Fabric Server
         curl -fSL -o fabric-server.jar "$FABRIC_SERVER_URL"
-        # 创建 mods 目录并下载 Fabric API
-        mkdir -p mods && curl -fSL -o mods/fabric-api.jar "$FABRIC_API_DOWNLOAD_URL"
+        # 下载 Fabric API
+        curl -fSL -o fabric-api.jar "$FABRIC_API_DOWNLOAD_URL"
 
     # Step 8: 生成随机RCON密码
     - name: Generate random RCON password
