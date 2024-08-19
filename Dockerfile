@@ -7,14 +7,10 @@ RUN java -jar fabric-server.jar --nogui --universe /now/data/
 ################################
 
 FROM eclipse-temurin:21-jre
-Expose 25565
 WORKDIR server
 
-# 处理编译文件
 COPY --from=builder server .
-RUN rm -rf .fabric server.properties eula.txt logs/* 
-
-# 覆盖项目的文件
+RUN rm -rf server.properties eula.txt logs/*
 COPY server.properties .
 RUN echo "eula=true" > eula.txt
 
@@ -61,8 +57,8 @@ ENV JVM_OPTS="\
 -XX:+UseStringDeduplication \
 -XX:+OptimizeStringConcat" \
     TZ=Asia/Shanghai
-
 RUN ln -sf /usr/share/zoneinfo/$TZ /etc/localtime \
     && echo $TZ > /etc/timezone
 
+Expose 25565
 ENTRYPOINT ["sh", "-c", "java -jar ${JVM_OPTS} fabric-server.jar --nogui --eraseCache --forceUpgrade --universe /data/"]
