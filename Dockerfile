@@ -12,7 +12,7 @@ tail -f /temp/app.log | while read LINE; do\n\
         echo "============`fabric`安装完成============"\n\
         exit 0\n\
     fi\n\
-done' > start-server.sh && chmod +x start-server.sh && sh start-server.sh
+done' > build-server.sh && chmod +x build-server.sh && sh build-server.sh
 
 ################################
 
