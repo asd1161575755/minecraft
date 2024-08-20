@@ -42,9 +42,9 @@ jobs:
         FABRIC_META_URL="https://meta.fabricmc.net/v2/versions"
         # 获取稳定的 Minecraft Server 版本
         if [ -z "${{ github.event.inputs.SERVER_VERSION }}" ]; then
-          SERVER_VERSION=$github.event.inputs.SERVER_VERSION
-        else
           SERVER_VERSION=$(curl -s $FABRIC_META_URL/game | jq -r '[.[] | select(.stable==true)][0].version')
+        else
+          SERVER_VERSION=${{ github.event.inputs.SERVER_VERSION }}
         if
         # 获取稳定的 Fabric Loader 版本
         FABRIC_LOADER_VERSION=$(curl -s $FABRIC_META_URL/loader | jq -r '[.[] | select(.stable==true)][0].version')
