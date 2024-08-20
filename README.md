@@ -73,3 +73,6 @@
 ### 其他
 - [客户端](https://ci.huangyuhui.net/job/HMCL/)
 - [docker-image.yml](.github/workflows/docker-image.yml)可自动完成镜像上传过程
+
+## 模组信息预览
+![模组](https://github.com/user-attachments/assets/b9b7801c-69ab-44c1-bad1-c0dfbd250de9)
