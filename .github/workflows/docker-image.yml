@@ -43,7 +43,9 @@ jobs:
         # 获取稳定的 Minecraft Server 版本
         if [ -z "${{ github.event.inputs.SERVER_VERSION }}" ]; then
           SERVER_VERSION=$(curl -s $FABRIC_META_URL/game | jq -r '[.[] | select(.stable==true)][0].version')
-        if
+        else
+          SERVER_VERSION=${{ github.event.inputs.SERVER_VERSION }}
+        fi
         # 获取稳定的 Fabric Loader 版本
         FABRIC_LOADER_VERSION=$(curl -s $FABRIC_META_URL/loader | jq -r '[.[] | select(.stable==true)][0].version')
         # 获取稳定的 Fabric Installer 版本
