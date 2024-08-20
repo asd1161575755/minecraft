@@ -23,16 +23,6 @@
 - [properties详解](https://minecraft.fandom.com/zh/wiki/Server.properties)
 - [server.properties](server.properties)
 
-### Rcon管理器
-- https://github.com/zkhssb/NectarRCON
-
-### 必要插件与模组
-> 此分支为纯净版本，模组支持还在制作中。目前从`Fabric`开始，可查阅`main-fabric`分支 
-
-### 其他
-- [客户端](https://ci.huangyuhui.net/job/HMCL/)
-- [docker-image.yml](.github/workflows/docker-image.yml)可自动完成镜像上传过程
-
 ### 使用说明
 - 世界资源默认读取`/data/`路径，可选择 -v /data/:/data/
 - 配置文件`server.properties`放置与server.jar所在的目录中，可选择 -v /server/server.properties:/server/server.properties
@@ -45,3 +35,10 @@
   - 可选择
     1. 通过自有配置覆盖来修改密码
     2. 通过`docker exec -it minecraft-server cat /server/server.properties`查询密码
+
+### 必要插件与模组
+> 此分支为纯净版本，模组支持还在制作中。目前从`Fabric`开始，可查阅`main-fabric`分支
+
+### 补充信息
+- [客户端](https://ci.huangyuhui.net/job/HMCL/)
+- [docker-image.yml](.github/workflows/docker-image.yml)可自动完成镜像上传过程
