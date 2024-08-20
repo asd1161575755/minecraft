@@ -41,7 +41,11 @@ jobs:
         # Fabric版本地址
         FABRIC_META_URL="https://meta.fabricmc.net/v2/versions"
         # 获取稳定的 Minecraft Server 版本
-        SERVER_VERSION=$(curl -s $FABRIC_META_URL/game | jq -r '[.[] | select(.stable==true)][0].version')
+        if [ -z "${{ github.event.inputs.SERVER_VERSION }}" ]; then
+          SERVER_VERSION=$github.event.inputs.SERVER_VERSION
+        else
+          SERVER_VERSION=$(curl -s $FABRIC_META_URL/game | jq -r '[.[] | select(.stable==true)][0].version')
+        if
         # 获取稳定的 Fabric Loader 版本
         FABRIC_LOADER_VERSION=$(curl -s $FABRIC_META_URL/loader | jq -r '[.[] | select(.stable==true)][0].version')
         # 获取稳定的 Fabric Installer 版本
