@@ -85,16 +85,39 @@ jobs:
           # 手动输入版本则直接构建
           echo "BUILD_NEEDED=true" >> $GITHUB_ENV
         fi
-    
-    # Step 6: 获取 Fabric API 下载 URL
+
+    #  获取结构 Fabric API 下载 URL
     - name: Fetch Fabric API download URL
       if: env.BUILD_NEEDED == 'true'
       id: fabric_api_download_url
       run: |
-        # Fabric API版本地址
-        FABRIC_API_URL="https://api.github.com/repos/FabricMC/fabric/releases?per_page=100" 
-        # 获取与当前 Server 版本匹配的 Fabric API 下载 URL
-        FABRIC_API_DOWNLOAD_URL=$(curl -s $FABRIC_API_URL | jq -r --arg SERVER_VERSION "$SERVER_VERSION" '[.[] | select(.target_commitish==$SERVER_VERSION)][0].assets[0].browser_download_url')
+        # Fabric API 基础 URL 和分页初始化
+        PAGE=1
+        FABRIC_API_DOWNLOAD_URL=""
+        FABRIC_API_BASE_URL="https://api.github.com/repos/FabricMC/fabric/releases?per_page=100"
+        while [[ -z "$FABRIC_API_DOWNLOAD_URL" ]]; do
+          # 请求当前页的 Fabric API 版本信息
+          FABRIC_API_URL="$FABRIC_API_BASE_URL&page=$PAGE"
+          RESPONSE=$(curl -s -w "%{http_code}" $FABRIC_API_URL)
+          HTTP_STATUS=$(echo "$RESPONSE" | tail -n1)
+          RESPONSE=$(echo "$RESPONSE" | head -n -1)
+          # 检查是否有数据返回或者达到上限
+          if [[ "$HTTP_STATUS" == "422" ]]; then
+            echo "未找到更多版本，退出循环"
+            break
+          elif [[ $(echo "$RESPONSE" | jq -r 'length') -eq 0 ]]; then
+            echo "未找到更多版本，退出循环"
+            break
+          fi
+          # 尝试获取与当前 Server 版本匹配的 Fabric API 下载 URL
+          FABRIC_API_DOWNLOAD_URL=$(echo "$RESPONSE" | jq -r --arg SERVER_VERSION "$SERVER_VERSION" '[.[] | select(.target_commitish==$SERVER_VERSION)][0].assets[0].browser_download_url')
+          # 增加页码，准备翻页
+          PAGE=$((PAGE + 1))
+        done
+        if [[ -z "$FABRIC_API_DOWNLOAD_URL" ]]; then
+          echo "找不到匹配的结构API下载URL"
+          exit 1
+        fi
         # 将信息写入ENV
         echo "FABRIC_API_DOWNLOAD_URL=$FABRIC_API_DOWNLOAD_URL" >> $GITHUB_ENV
 
