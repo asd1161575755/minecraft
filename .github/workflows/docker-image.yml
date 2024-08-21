@@ -96,6 +96,9 @@ jobs:
         FABRIC_API_DOWNLOAD_URL=""
         FABRIC_API_BASE_URL="https://api.github.com/repos/FabricMC/fabric/releases?per_page=100"
         while [[ -z "$FABRIC_API_DOWNLOAD_URL" ]]; do
+          # 打印翻页信息
+          echo "Processing page: $PAGE"
+          echo "Download URL: $FABRIC_API_DOWNLOAD_URL"
           # 请求当前页的 Fabric API 版本信息
           FABRIC_API_URL="$FABRIC_API_BASE_URL&page=$PAGE"
           RESPONSE=$(curl -s -w "%{http_code}" $FABRIC_API_URL)
@@ -118,7 +121,6 @@ jobs:
           echo "找不到匹配的结构API下载URL"
           exit 1
         fi
-        echo "$FABRIC_API_DOWNLOAD_URL"
         # 将信息写入ENV
         echo "FABRIC_API_DOWNLOAD_URL=$FABRIC_API_DOWNLOAD_URL" >> $GITHUB_ENV
 
