@@ -118,6 +118,7 @@ jobs:
           echo "找不到匹配的结构API下载URL"
           exit 1
         fi
+        echo "$FABRIC_API_DOWNLOAD_URL"
         # 将信息写入ENV
         echo "FABRIC_API_DOWNLOAD_URL=$FABRIC_API_DOWNLOAD_URL" >> $GITHUB_ENV
 
