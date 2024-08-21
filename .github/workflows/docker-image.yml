@@ -107,7 +107,7 @@ jobs:
     
           # 输出调试信息
           echo "HTTP Status: $HTTP_STATUS"
-          echo "Response: $RESPONSE"
+          #echo "Response: $RESPONSE"
     
           # 检查是否有数据返回或者达到上限
           if [[ "$HTTP_STATUS" == "422" ]]; then
