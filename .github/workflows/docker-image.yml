@@ -92,7 +92,7 @@ jobs:
       id: fabric_api_download_url
       run: |
         # Fabric API版本地址
-        FABRIC_API_URL="https://api.github.com/repos/FabricMC/fabric/releases" 
+        FABRIC_API_URL="https://api.github.com/repos/FabricMC/fabric/releases?per_page=100" 
         # 获取与当前 Server 版本匹配的 Fabric API 下载 URL
         FABRIC_API_DOWNLOAD_URL=$(curl -s $FABRIC_API_URL | jq -r --arg SERVER_VERSION "$SERVER_VERSION" '[.[] | select(.target_commitish==$SERVER_VERSION)][0].assets[0].browser_download_url')
         # 将信息写入ENV
