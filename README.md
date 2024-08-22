@@ -77,9 +77,9 @@
    - **EntityCulling**: 仅渲染玩家视角内的实体
       - https://modrinth.com/mod/entityculling
       - https://github.com/tr7zw/EntityCulling/releases
-   - **Sodium**: 客户端的渲染优化
-      - https://modrinth.com/mod/sodium
-      - https://github.com/CaffeineMC/sodium-fabric/releases
+   - **ImmediatelyFast**: 客户端的渲染优化
+      - https://modrinth.com/mod/immediatelyfast
+      - https://github.com/RaphiMC/ImmediatelyFast/releases
 
 #### 登录模组
 > 未完成整理
@@ -88,4 +88,11 @@
 
 #### 实用模组
 > 未完成整理
-- 
+
+##### 服务端
+   - 
+
+##### 客户端
+   - **ModMenu**: 模组菜单，可以预览已安装模组
+      - https://modrinth.com/mod/modmenu
+      - https://github.com/TerraformersMC/ModMenu
