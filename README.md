@@ -99,6 +99,7 @@
    - **Inventory**: 背包整理
       - https://modrinth.com/mod/balm
       - https://modrinth.com/mod/inventory-essentials
+      - https://modrinth.com/mod/inventorytweak
    - **ModMenu**: 模组菜单，可以预览已安装模组
       - https://modrinth.com/mod/modmenu
       - https://github.com/TerraformersMC/ModMenu
