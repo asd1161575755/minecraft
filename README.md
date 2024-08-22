@@ -41,4 +41,5 @@
 
 ### 补充信息
 - [客户端](https://ci.huangyuhui.net/job/HMCL/)
+- [NectarRCON](https://github.com/zkhssb/NectarRCON)
 - [docker-image.yml](.github/workflows/docker-image.yml)可自动完成镜像上传过程
