@@ -52,6 +52,9 @@
 
 #### 优化模组
 
+##### 共有
+   - **FerriteCore**: 减少内存占用，特别是在大量区块和实体存在时非常有用
+      - https://modrinth.com/mod/ferrite-core
 ##### 服务端
    - **Lithium**: 优化物理引擎、实体处理等核心服务器功能
       - https://modrinth.com/mod/lithium
@@ -59,8 +62,6 @@
    - **Krypton**: 优化服务器网络代码，减少网络延迟
       - https://modrinth.com/mod/krypton
       - https://github.com/astei/krypton/releases
-   - **FerriteCore**: 减少内存占用，特别是在大量区块和实体存在时非常有用
-      - https://modrinth.com/mod/ferrite-core
    - **Clumps**: 将经验球合并减少大量经验球产生时的性能消耗（可选，会略微降低画面效果）
       - https://modrinth.com/mod/clumps
    - **Chunky**: 预先生成世界的部分或全部区块，避免玩家探索新区域时的卡顿（可选，主要是主动渲染未涉足区域）
@@ -69,8 +70,6 @@
       - https://modrinth.com/mod/servercore
       - https://github.com/Wesley1808/ServerCore/releases
 ##### 客户端
-   - **FerriteCore**: 减少内存占用，特别是在大量区块和实体存在时非常有用
-      - https://modrinth.com/mod/ferrite-core
    - **Dynamic View**: 动态调整视距，不聚焦窗口时降低fps
       - https://modrinth.com/mod/dynamic-fps
       - https://github.com/juliand665/Dynamic-FPS/releases
@@ -89,10 +88,15 @@
 #### 实用模组
 > 未完成整理
 
-##### 服务端
-   - 
+##### 共有
+   - **Inventory**: 背包整理
+      - https://modrinth.com/mod/inventory-essentials
+      - https://www.curseforge.com/minecraft/mc-mods/inventory-sorter/files/all
 
 ##### 客户端
+   - **Xaero's Minimap**: 地图
+      - https://modrinth.com/mod/xaeros-minimap
+      - https://modrinth.com/mod/xaeros-world-map
    - **ModMenu**: 模组菜单，可以预览已安装模组
       - https://modrinth.com/mod/modmenu
       - https://github.com/TerraformersMC/ModMenu
