@@ -90,6 +90,7 @@
 
 ##### 共有
    - **Inventory**: 背包整理
+      - https://modrinth.com/mod/balm
       - https://modrinth.com/mod/inventory-essentials
 
 ##### 客户端
