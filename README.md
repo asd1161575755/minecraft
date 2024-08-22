@@ -83,6 +83,6 @@
       - https://modrinth.com/mod/sodium
       - https://github.com/CaffeineMC/sodium-fabric/releases
 
-#### **登录管理**
+#### **登录模组**
 - AutoLogin https://modrinth.com/mod/autologin
 - LuckPerms https://modrinth.com/mod/luckperms
