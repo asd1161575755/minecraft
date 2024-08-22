@@ -100,14 +100,17 @@ jobs:
           # 请求当前页的 Fabric API 版本信息
           FABRIC_API_URL="$FABRIC_API_BASE_URL&page=$PAGE"
           RESPONSE=$(curl -s -w "%{http_code}" $FABRIC_API_URL)
-          RESPONSE=$(echo "$RESPONSE" | head -n -1)
           HTTP_STATUS=$(echo "$RESPONSE" | tail -n1)
+          RESPONSE=$(echo "$RESPONSE" | head -n -1)
           # 输出调试信息
           echo "Fetching page $PAGE: $FABRIC_API_URL"
           echo "HTTP Status: $HTTP_STATUS"
           #echo "Response: $RESPONSE"
           # 检查是否有数据返回或者达到上限
           if [[ "$HTTP_STATUS" == "422" ]]; then
+            echo "未找到更多版本，退出循环"
+            break
+           elif [[ "$HTTP_STATUS" == "]" ]]; then
             echo "未找到更多版本，退出循环"
             break
           elif [[ $(echo "$RESPONSE" | jq -r 'length') -eq 0 ]]; then
