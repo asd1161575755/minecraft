@@ -49,9 +49,6 @@
 - [docker-image.yml](.github/workflows/docker-image.yml)可自动完成镜像上传过程
 
 ### 必要插件与模组
-> 未完成整理
-> 
-> 会逐步测试并把下方优化模组作为默认模组
 
 #### 优化模组
 
@@ -84,6 +81,11 @@
       - https://modrinth.com/mod/sodium
       - https://github.com/CaffeineMC/sodium-fabric/releases
 
-#### **登录模组**
+#### 登录模组
+> 未完成整理
 - AutoLogin https://modrinth.com/mod/autologin
 - LuckPerms https://modrinth.com/mod/luckperms
+
+#### 实用模组
+> 未完成整理
+- 
