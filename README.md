@@ -47,6 +47,7 @@
 ### 补充信息
 - [客户端启动器](https://ci.huangyuhui.net/job/HMCL/)
 - [客户端整合基础包](https://www.curseforge.com/minecraft/modpacks/fabulously-optimized)
+- [NectarRCON](https://github.com/zkhssb/NectarRCON)
 - [docker-image.yml](.github/workflows/docker-image.yml)可自动完成镜像上传过程
 
 ### 推荐插件与模组
