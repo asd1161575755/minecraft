@@ -71,7 +71,7 @@
    - **ServerCore**: 优化多线程处理和实体管理，适用于需要极致性能优化的场景（可选，可通过配置调整服务器生成相关内容）
       - https://modrinth.com/mod/servercore
       - https://github.com/Wesley1808/ServerCore/releases
-##### 客户端
+##### 客户端（推荐直接用[整合基础包](https://www.curseforge.com/minecraft/modpacks/fabulously-optimized)）
    - **Dynamic View**: 动态调整视距，不聚焦窗口时降低fps
       - https://modrinth.com/mod/dynamic-fps
       - https://github.com/juliand665/Dynamic-FPS/releases
@@ -91,14 +91,14 @@
 > 未完成整理
 
 ##### 共有
-   - **Inventory**: 背包整理
-      - https://modrinth.com/mod/balm
-      - https://modrinth.com/mod/inventory-essentials
 
 ##### 客户端
    - **Xaero's Minimap**: 地图
       - https://modrinth.com/mod/xaeros-minimap
       - https://modrinth.com/mod/xaeros-world-map
+   - **Inventory**: 背包整理
+      - https://modrinth.com/mod/balm
+      - https://modrinth.com/mod/inventory-essentials
    - **ModMenu**: 模组菜单，可以预览已安装模组
       - https://modrinth.com/mod/modmenu
       - https://github.com/TerraformersMC/ModMenu
