@@ -108,10 +108,10 @@ jobs:
           #echo "Response: $RESPONSE"
           # 检查是否有数据返回或者达到上限
           if [[ "$HTTP_STATUS" == "422" ]]; then
-            echo "Reached the 1000 result limit or encountered an error. Exiting loop."
+            echo "未找到更多版本，退出循环"
             break
           elif [[ $(echo "$RESPONSE" | jq -r 'length') -eq 0 ]]; then
-            echo "No more releases found. Exiting loop."
+            echo "未找到更多版本，退出循环"
             break
           fi
           # 尝试获取与当前 Server 版本匹配的 Fabric API 下载 URL
@@ -123,7 +123,7 @@ jobs:
           PAGE=$((PAGE + 1))
         done
         if [[ -z "$FABRIC_API_DOWNLOAD_URL" ]]; then
-          echo "No matching Fabric API download URL found."
+          echo "未找到更多版本，退出方法"
           exit 1
         fi
         echo "Found Fabric API Download URL: $FABRIC_API_DOWNLOAD_URL"
