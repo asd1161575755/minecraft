@@ -89,10 +89,12 @@
 
 #### 实用模组
 > 未完成整理
+>
+> [整合基础包](https://www.curseforge.com/minecraft/modpacks/fabulously-optimized)不存在的模组
 
 ##### 共有
 
-##### 客户端
+##### 客户端 
    - **Xaero's Minimap**: 地图
       - https://modrinth.com/mod/xaeros-minimap
       - https://modrinth.com/mod/xaeros-world-map
