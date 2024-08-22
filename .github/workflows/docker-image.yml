@@ -95,14 +95,13 @@ jobs:
         PAGE=1
         FABRIC_API_DOWNLOAD_URL=""
         FABRIC_API_BASE_URL="https://api.github.com/repos/FabricMC/fabric/releases?per_page=100"
-    
+        # 循环查找版本
         while [[ -z "$FABRIC_API_DOWNLOAD_URL" ]]; do
           # 请求当前页的 Fabric API 版本信息
           FABRIC_API_URL="$FABRIC_API_BASE_URL&page=$PAGE"
-          echo "Fetching page $PAGE: $FABRIC_API_URL"
           RESPONSE=$(curl -s -w "%{http_code}" $FABRIC_API_URL)
-          HTTP_STATUS=$(echo "$RESPONSE" | tail -n1)
           RESPONSE=$(echo "$RESPONSE" | head -n -1)
+          HTTP_STATUS=$(echo "$RESPONSE" | tail -n1)
           # 输出调试信息
           echo "HTTP Status: $HTTP_STATUS"
           #echo "Response: $RESPONSE"
@@ -116,17 +115,14 @@ jobs:
           fi
           # 尝试获取与当前 Server 版本匹配的 Fabric API 下载 URL
           MATCHED_RELEASE=$(echo "$RESPONSE" | jq -r --arg SERVER_VERSION "$SERVER_VERSION" '[.[] | select(.target_commitish==$SERVER_VERSION)][0]')
-          echo "Matched Release: $MATCHED_RELEASE"
           FABRIC_API_DOWNLOAD_URL=$(echo "$MATCHED_RELEASE" | jq -r '.assets[0].browser_download_url // ""')
-          echo "Download URL: $FABRIC_API_DOWNLOAD_URL"
           # 增加页码，准备翻页
           PAGE=$((PAGE + 1))
         done
         if [[ -z "$FABRIC_API_DOWNLOAD_URL" ]]; then
-          echo "未找到更多版本，退出方法"
+          echo "未找到更多版本，退出Actions"
           exit 1
         fi
-        echo "Found Fabric API Download URL: $FABRIC_API_DOWNLOAD_URL"
         # 将信息写入ENV
         echo "FABRIC_API_DOWNLOAD_URL=$FABRIC_API_DOWNLOAD_URL" >> $GITHUB_ENV
 
