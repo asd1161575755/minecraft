@@ -103,6 +103,7 @@ jobs:
           RESPONSE=$(echo "$RESPONSE" | head -n -1)
           HTTP_STATUS=$(echo "$RESPONSE" | tail -n1)
           # 输出调试信息
+          echo "Fetching page $PAGE: $FABRIC_API_URL"
           echo "HTTP Status: $HTTP_STATUS"
           #echo "Response: $RESPONSE"
           # 检查是否有数据返回或者达到上限
