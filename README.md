@@ -69,6 +69,7 @@
       - https://modrinth.com/plugin/chunky
    - **ServerCore**: 优化多线程处理和实体管理，适用于需要极致性能优化的场景（可选，可通过配置调整服务器生成相关内容）
       - https://modrinth.com/mod/servercore
+      - https://github.com/Wesley1808/ServerCore/releases
 ##### 客户端
    - **FerriteCore**: 减少内存占用，特别是在大量区块和实体存在时非常有用
       - https://modrinth.com/mod/ferrite-core
