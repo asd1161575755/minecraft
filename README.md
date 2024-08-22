@@ -98,6 +98,7 @@
       - https://modrinth.com/mod/xaeros-world-map
    - **Inventory**: 背包整理
       - https://modrinth.com/mod/balm
+      - https://github.com/wisp-forest/owo-lib
       - https://modrinth.com/mod/inventory-essentials
       - https://modrinth.com/mod/inventorytweak
    - **ModMenu**: 模组菜单，可以预览已安装模组
