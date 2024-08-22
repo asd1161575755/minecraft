@@ -45,7 +45,8 @@
 ![模组](https://github.com/user-attachments/assets/b9b7801c-69ab-44c1-bad1-c0dfbd250de9)
 
 ### 补充信息
-- [客户端](https://ci.huangyuhui.net/job/HMCL/)
+- [客户端启动器](https://ci.huangyuhui.net/job/HMCL/)
+- [客户端整合基础包](https://www.curseforge.com/minecraft/modpacks/fabulously-optimized)
 - [docker-image.yml](.github/workflows/docker-image.yml)可自动完成镜像上传过程
 
 ### 推荐插件与模组
