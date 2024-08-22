@@ -17,7 +17,7 @@
 ### 制作Dockerfile
 - [Dockerfile](Dockerfile)
 - docker build -t minecraft-server .
-- docker run -d -v /data/:/data/ -p 25565:25565 -p 25575:25575 minecraft-server
+- docker run -d --restart=unless-stopped -v /data/:/data/ -p 25565:25565 -p 25575:25575 minecraft-server
 
 ### 编写server.properties文件
 - [properties详解](https://minecraft.fandom.com/zh/wiki/Server.properties)
