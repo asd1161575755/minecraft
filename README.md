@@ -91,7 +91,6 @@
 ##### 共有
    - **Inventory**: 背包整理
       - https://modrinth.com/mod/inventory-essentials
-      - https://www.curseforge.com/minecraft/mc-mods/inventory-sorter/files/all
 
 ##### 客户端
    - **Xaero's Minimap**: 地图
