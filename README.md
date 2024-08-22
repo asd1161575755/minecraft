@@ -32,6 +32,7 @@
 - 配置文件`server.properties`放置与server.jar所在的目录中，可选择 -v /server/server.properties:/server/server.properties
 - 模组文件默认读取`/server/mods/`路径，可选择 -v /server/mods:/server/mods
   - `fabric-api.jar`基础模组会自动添加到mods中，配置挂载也不会影响。
+- 模组配置文件默认读取`/server/config/`，可选择 -v /server/config:/server/config
 - 端口都按官方默认
   - server-port=25565，可选择 -p 25565:25565
   - rcon.port=25575，可选择 -p 25575:25575
