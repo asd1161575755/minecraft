@@ -99,7 +99,7 @@ jobs:
         while [[ -z "$FABRIC_API_DOWNLOAD_URL" ]]; do
           # 请求当前页的 Fabric API 版本信息
           FABRIC_API_URL="$FABRIC_API_BASE_URL&page=$PAGE"
-          RESPONSE=$(curl -s -w "%{http_code}" $FABRIC_API_URL)
+          RESPONSE=$(curl -s -w "\n%{http_code}" -H "Authorization: token ${{ secrets.ACTIONS_TOKENS }}" "$FABRIC_API_URL")
           HTTP_STATUS=$(echo "$RESPONSE" | tail -n1)
           RESPONSE=$(echo "$RESPONSE" | head -n -1)
           # 输出调试信息
