@@ -64,8 +64,10 @@
    - **Krypton**: 优化服务器网络代码，减少网络延迟
       - https://modrinth.com/mod/krypton
       - https://github.com/astei/krypton/releases
-   - **Concurrent Chunk Management Engine**:并发块管理引擎，旨在提高块生成、I/O 和加载的性能
+   - **Concurrent Chunk Management Engine**: 并发块管理引擎，旨在提高块生成、I/O 和加载的性能
       - https://modrinth.com/mod/c2me-fabric
+   - **Very Many Players**: 非常多的玩家，旨在提高高玩家人数的服务器性能
+      - https://modrinth.com/mod/vmp-fabric
    - **Clumps**: 将经验球合并减少大量经验球产生时的性能消耗（可选，会略微降低画面效果）
       - https://modrinth.com/mod/clumps
    - **Chunky**: 预先生成世界的部分或全部区块，避免玩家探索新区域时的卡顿（可选，主要是主动渲染未涉足区域）
