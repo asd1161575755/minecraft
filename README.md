@@ -66,8 +66,12 @@
       - https://github.com/astei/krypton/releases
    - **Concurrent Chunk Management Engine**: 并发块管理引擎，旨在提高块生成、I/O 和加载的性能
       - https://modrinth.com/mod/c2me-fabric
+   - **Noisium Noisium**: 优化世界生成过程的性能以获得更好的游戏体验
+      - https://modrinth.com/mod/noisium
    - **Very Many Players**: 非常多的玩家，旨在提高高玩家人数的服务器性能
       - https://modrinth.com/mod/vmp-fabric
+   - **BRRP**: 更好的运行时资源包，运行时资源包减少了I/O（可选，目前改善不大）
+      - https://modrinth.com/mod/brrp 
    - **Clumps**: 将经验球合并减少大量经验球产生时的性能消耗（可选，会略微降低画面效果）
       - https://modrinth.com/mod/clumps
    - **Chunky**: 预先生成世界的部分或全部区块，避免玩家探索新区域时的卡顿（可选，主要是主动渲染未涉足区域）
@@ -96,7 +100,13 @@
 >
 > [整合基础包](https://www.curseforge.com/minecraft/modpacks/fabulously-optimized)不存在的模组
 
-##### 共有
+##### 服务端
+   - **bad packets**: 允许在不同 Mod 平台之间进行数据包消息传递的库，一些模组会用到这个
+      - https://modrinth.com/mod/badpackets
+   - **WTHIT**: 所见之物显示在HUB
+     - https://modrinth.com/mod/wthit
+   - **When Dungeons Arise**: 当地牢出现时
+      - https://modrinth.com/mod/when-dungeons-arise
 
 ##### 客户端 
    - **Xaero's Minimap**: 地图
