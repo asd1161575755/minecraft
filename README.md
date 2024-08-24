@@ -114,6 +114,8 @@
       - https://modrinth.com/mod/when-dungeons-arise
    - **Beautified Chat**: 美化聊天
       - https://modrinth.com/mod/beautified-chat-server
+   - **PerPlayerWanderingTraders**: 让流浪商人以玩家相近位置生成
+      - https://modrinth.com/mod/beautified-chat-server
 
 ##### 客户端 
    - **Xaero's Minimap**: 地图
