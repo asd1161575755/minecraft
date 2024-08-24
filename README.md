@@ -70,6 +70,10 @@
       - https://modrinth.com/mod/noisium
    - **Very Many Players**: 非常多的玩家，旨在提高高玩家人数的服务器性能
       - https://modrinth.com/mod/vmp-fabric
+   - **RecipeCooldown**: 配方冷却，防止允许玩家发送垃圾邮件数据包并导致服务器延迟的漏洞
+      - https://modrinth.com/mod/recipecooldown
+   - **ScalableLux**: 可提高 Minecraft 中灯光更新的性能
+      - https://modrinth.com/mod/scalablelux
    - **BRRP**: 更好的运行时资源包，运行时资源包减少了I/O（可选，目前改善不大）
       - https://modrinth.com/mod/brrp 
    - **Clumps**: 将经验球合并减少大量经验球产生时的性能消耗（可选，会略微降低画面效果）
@@ -94,6 +98,7 @@
 > 未完成整理
 - AutoLogin https://modrinth.com/mod/autologin
 - LuckPerms https://modrinth.com/mod/luckperms
+- EasyAuth https://modrinth.com/mod/easyauth
 
 #### 实用模组
 > 未完成整理
@@ -107,6 +112,8 @@
      - https://modrinth.com/mod/wthit
    - **When Dungeons Arise**: 当地牢出现时
       - https://modrinth.com/mod/when-dungeons-arise
+   - **Beautified Chat**: 美化聊天
+      - https://modrinth.com/mod/beautified-chat-server
 
 ##### 客户端 
    - **Xaero's Minimap**: 地图
