@@ -118,7 +118,15 @@
       - https://modrinth.com/mod/beautified-chat-server
    - **Tree Harvester**: 树木收割机;等下快速砍树，叶子快速腐烂等
       - https://modrinth.com/mod/tree-harvester
-
+   - **Healing Campfire**: 治愈篝火
+      - https://modrinth.com/mod/healing-campfire
+   - **No Hostiles Around Campfire**: 篝火周围没有敌人
+      - https://modrinth.com/mod/healing-campfire
+   - **Despawning Eggs Hatch**: 干草块上产卵孵化
+      - https://modrinth.com/mod/healing-campfire
+   - **Your Items Are Safe**: 死亡墓碑
+      - https://modrinth.com/mod/your-items-are-safe
+   
 ##### 客户端 
    - **Xaero's Minimap**: 地图
       - https://modrinth.com/mod/xaeros-minimap
