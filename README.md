@@ -115,7 +115,7 @@
    - **Beautified Chat**: 美化聊天
       - https://modrinth.com/mod/beautified-chat-server
    - **PerPlayerWanderingTraders**: 让流浪商人以玩家相近位置生成
-      - https://modrinth.com/mod/beautified-chat-server
+      - https://modrinth.com/mod/perplayerwanderingtraders
    - **Tree Harvester**: 树木收割机;等下快速砍树，叶子快速腐烂等
       - https://modrinth.com/mod/tree-harvester
    - **Healing Campfire**: 治愈篝火
