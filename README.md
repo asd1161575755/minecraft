@@ -126,6 +126,8 @@
       - https://modrinth.com/mod/healing-campfire
    - **Your Items Are Safe**: 死亡墓碑
       - https://modrinth.com/mod/your-items-are-safe
+   - **Toms Mobs**: 更多生物
+      - https://modrinth.com/mod/toms-mobs
    
 ##### 客户端 
    - **Xaero's Minimap**: 地图
