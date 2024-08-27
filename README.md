@@ -136,3 +136,13 @@
       - https://modrinth.com/mod/owo-lib
       - https://modrinth.com/mod/inventory-essentials
       - https://modrinth.com/mod/inventorytweak
+    
+#### 备注
+
+##### modrinth_version_file
+GET https://api.modrinth.com/v2/version_file/a7cce732abba7fafbec33f9dc6c99d3dda6fff9a?algorithm=sha1
+Content-Type: application/json
+
+##### modrinth_version_file
+GET https://api.modrinth.com/v2/project/P7dR8mSH/version?loaders=["fabric"]&game_versions=["1.21.1"]
+Content-Type: application/json
