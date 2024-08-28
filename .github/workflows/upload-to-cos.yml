@@ -1,6 +1,8 @@
 name: Upload to Tencent COS
 
 on:
+  schedule:
+    - cron: '0 0 */3 * *'
   workflow_dispatch:
 
 jobs:
