@@ -148,7 +148,7 @@ GET https://api.modrinth.com/v2/version_file/a7cce732abba7fafbec33f9dc6c99d3dda6
 Content-Type: application/json
 
 
-### modrinth_version_file
+### modrinth_project_version
 # response：url = $[0].files[0].url
 GET https://api.modrinth.com/v2/project/{projectId}/version?loaders=["fabric"]&game_versions=["1.21.1"]
 Content-Type: application/json
