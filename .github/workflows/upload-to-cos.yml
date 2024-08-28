@@ -1,0 +1,29 @@
+name: Upload to Tencent COS
+
+on: 
+  push:
+    branches:
+      - main-fabric
+
+jobs:
+  upload_to_cos:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Install COS CLI
+      run: |
+        curl -sL https://cosbrowser.cloud.tencent.com/release/coscli-linux.zip -o coscli.zip
+        unzip coscli.zip
+        sudo mv coscli /usr/local/bin/
+        rm coscli.zip
+
+    - name: Upload to Tencent COS
+      run: |
+        coscli -u ${COS_REGION} -a ${{ secrets.TENCENT_SECRET_ID }} -s ${{ secrets.TENCENT_SECRET_KEY }} \
+        cp -r ./expand cos://${COS_BUCKET_NAME}/minecraft/
+      env:
+        COS_REGION: cos.ap-guangzhou.myqcloud.com
+        COS_BUCKET_NAME: system-1302599754
