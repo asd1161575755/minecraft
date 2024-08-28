@@ -15,15 +15,14 @@ jobs:
 
     - name: Install COS CLI
       run: |
-        curl -sL https://cosbrowser.cloud.tencent.com/release/coscli-linux.zip -o coscli.zip
-        unzip coscli.zip
-        sudo mv coscli /usr/local/bin/
-        rm coscli.zip
+        curl -o coscli.sh -sSL https://cloud.tencent.com/document/product/436/62774
+        bash coscli.sh
 
     - name: Upload to Tencent COS
       run: |
-        coscli -u ${COS_REGION} -a ${{ secrets.TENCENT_SECRET_ID }} -s ${{ secrets.TENCENT_SECRET_KEY }} \
-        cp -r ./expand cos://${COS_BUCKET_NAME}/minecraft/
+        coscli cp -r ./expand cos://${{ env.COS_BUCKET_NAME }}/minecraft/
       env:
-        COS_REGION: cos.ap-guangzhou.myqcloud.com
+        TENCENT_SECRET_ID: ${{ secrets.TENCENT_SECRET_ID }}
+        TENCENT_SECRET_KEY: ${{ secrets.TENCENT_SECRET_KEY }}
+        COS_REGION: ap-guangzhou
         COS_BUCKET_NAME: system-1302599754
