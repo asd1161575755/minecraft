@@ -2,6 +2,7 @@ name: Upload to Tencent COS
 
 on: 
   workflow_dispatch:
+    inputs:
 
 jobs:
   upload_to_cos:
