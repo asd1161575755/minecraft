@@ -1,9 +1,13 @@
 name: Upload to Tencent COS
 
 on:
-  schedule:
-    - cron: '0 0 */3 * *'
   workflow_dispatch:
+    inputs:
+      TEST:
+        description: '测试'
+        required: false
+        default: ''
+        type: string
 
 jobs:
   upload_to_cos:
