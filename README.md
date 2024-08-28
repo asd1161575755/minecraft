@@ -143,11 +143,13 @@
 
 ```http
 ### modrinth_version_file
+# response：projectId = $.project_id
 GET https://api.modrinth.com/v2/version_file/a7cce732abba7fafbec33f9dc6c99d3dda6fff9a?algorithm=sha1
 Content-Type: application/json
 
 
 ### modrinth_version_file
-GET https://api.modrinth.com/v2/project/P7dR8mSH/version?loaders=["fabric"]&game_versions=["1.21.1"]
+# response：url = $[0].files[0].url
+GET https://api.modrinth.com/v2/project/{projectId}/version?loaders=["fabric"]&game_versions=["1.21.1"]
 Content-Type: application/json
 ```
