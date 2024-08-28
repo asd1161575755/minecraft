@@ -142,11 +142,13 @@
 #### 模组自动更新
 
 ```http
+### file_sha1
+# fileSha1 = sha1(path)
+
 ### modrinth_version_file
 # response：projectId = $.project_id
-GET https://api.modrinth.com/v2/version_file/a7cce732abba7fafbec33f9dc6c99d3dda6fff9a?algorithm=sha1
+GET https://api.modrinth.com/v2/version_file/${fileSha1}?algorithm=sha1
 Content-Type: application/json
-
 
 ### modrinth_project_version
 # response：url = $[0].files[0].url
