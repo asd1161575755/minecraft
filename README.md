@@ -139,7 +139,7 @@
       - https://modrinth.com/mod/inventory-essentials
       - https://modrinth.com/mod/inventorytweak
     
-#### 备注
+#### 模组自动更新
 
 ```http
 ### modrinth_version_file
