@@ -1,0 +1,29 @@
+name: Upload to Tencent COS
+
+on:
+  workflow_dispatch:
+
+jobs:
+  upload_to_cos:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Install COS CLI
+      run: |
+        # 下载并安装 COS CLI
+        curl -o coscli -sSL https://cosbrowser.cloud.tencent.com/software/coscli/coscli-v1.0.0-linux-amd64
+        chmod 755 coscli
+        ./coscli --version
+
+    - name: Upload to Tencent COS
+      run: |
+        # 使用 COS CLI 将文件上传到腾讯云 COS
+        ./coscli cp -r ./expand cos://${{ env.COS_BUCKET_NAME }}/minecraft/
+      env:
+        TENCENT_SECRET_ID: ${{ secrets.TENCENT_SECRET_ID }}
+        TENCENT_SECRET_KEY: ${{ secrets.TENCENT_SECRET_KEY }}
+        COS_REGION: ap-guangzhou
+        COS_BUCKET_NAME: system-1302599754
