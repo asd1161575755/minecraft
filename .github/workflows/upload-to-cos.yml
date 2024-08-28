@@ -1,13 +1,8 @@
 name: Upload to Tencent COS
 
+# 触发配置
 on:
   workflow_dispatch:
-    inputs:
-      TEST:
-        description: '测试'
-        required: false
-        default: ''
-        type: string
 
 jobs:
   upload_to_cos:
