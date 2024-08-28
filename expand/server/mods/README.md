@@ -1,0 +1,48 @@
+这里存储则采用的服务端模组
+
+### 优化
+   - **Lithium**: 优化物理引擎、实体处理等核心服务器功能
+      - https://modrinth.com/mod/lithium
+   - **Krypton**: 优化服务器网络代码，减少网络延迟
+      - https://modrinth.com/mod/krypton
+   - **Concurrent Chunk Management Engine**: 并发块管理引擎，旨在提高块生成、I/O 和加载的性能
+      - https://modrinth.com/mod/c2me-fabric
+   - **Noisium Noisium**: 优化世界生成过程的性能以获得更好的游戏体验
+      - https://modrinth.com/mod/noisium
+   - **Very Many Players**: 非常多的玩家，旨在提高高玩家人数的服务器性能
+      - https://modrinth.com/mod/vmp-fabric
+   - **RecipeCooldown**: 配方冷却，防止允许玩家发送垃圾邮件数据包并导致服务器延迟的漏洞
+      - https://modrinth.com/mod/recipecooldown
+   - **ScalableLux**: 可提高 Minecraft 中灯光更新的性能
+      - https://modrinth.com/mod/scalablelux
+   - **BRRP**: 更好的运行时资源包，运行时资源包减少了I/O（可选，目前改善不大）
+      - https://modrinth.com/mod/brrp 
+   - **Clumps**: 将经验球合并减少大量经验球产生时的性能消耗（可选，会略微降低画面效果）
+      - https://modrinth.com/mod/clumps
+   - **Chunky**: 预先生成世界的部分或全部区块，避免玩家探索新区域时的卡顿（可选，主要是主动渲染未涉足区域）
+      - https://modrinth.com/plugin/chunky
+   - **ServerCore**: 优化多线程处理和实体管理，适用于需要极致性能优化的场景（可选，可通过配置调整服务器生成相关内容）
+      - https://modrinth.com/mod/servercore
+### 实用
+   - **bad packets**: 允许在不同 Mod 平台之间进行数据包消息传递的库，一些模组会用到这个
+      - https://modrinth.com/mod/badpackets
+   - **WTHIT**: 所见之物显示在HUB
+     - https://modrinth.com/mod/wthit
+   - **When Dungeons Arise**: 当地牢出现时
+      - https://modrinth.com/mod/when-dungeons-arise
+   - **Beautified Chat**: 美化聊天
+      - https://modrinth.com/mod/beautified-chat-server
+   - **PerPlayerWanderingTraders**: 让流浪商人以玩家相近位置生成
+      - https://modrinth.com/mod/perplayerwanderingtraders
+   - **Tree Harvester**: 树木收割机;等下快速砍树，叶子快速腐烂等
+      - https://modrinth.com/mod/tree-harvester
+   - **Healing Campfire**: 治愈篝火
+      - https://modrinth.com/mod/healing-campfire
+   - **No Hostiles Around Campfire**: 篝火周围没有敌人
+      - https://modrinth.com/mod/healing-campfire
+   - **Despawning Eggs Hatch**: 干草块上产卵孵化
+      - https://modrinth.com/mod/healing-campfire
+   - **Your Items Are Safe**: 死亡墓碑
+      - https://modrinth.com/mod/your-items-are-safe
+   - **Toms Mobs**: 更多生物
+      - https://modrinth.com/mod/toms-mobs
