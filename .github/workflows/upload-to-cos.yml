@@ -33,3 +33,9 @@ jobs:
         ./coscli cp -r expand/ cos://${{ env.COS_BUCKET_NAME }}/minecraft/
       env:
         COS_BUCKET_NAME: system-1302599754
+
+    - name: Upload COS CLI logs
+      uses: actions/upload-artifact@v3
+      with:
+        name: coscli-logs
+        path: /home/runner/work/minecraft/minecraft/coscli_output/
