@@ -30,6 +30,6 @@ jobs:
 
     - name: Upload to Tencent COS
       run: |
-        ./coscli cp -r expand/* cos://${{ env.COS_BUCKET_NAME }}/minecraft/
+        ./coscli cp -r expand/ cos://${{ env.COS_BUCKET_NAME }}/minecraft/
       env:
         COS_BUCKET_NAME: system-1302599754
