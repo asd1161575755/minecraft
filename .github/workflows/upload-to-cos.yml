@@ -1,6 +1,5 @@
 name: Upload to Tencent COS
 
-# 触发配置
 on:
   workflow_dispatch:
 
