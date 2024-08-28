@@ -19,8 +19,8 @@ jobs:
 
     - name: Configure COS CLI
       run: |
-        ./coscli config init -i ${{ secrets.TENCENT_SECRET_ID }} -k ${{ secrets.TENCENT_SECRET_KEY }} \
-        -b ${{ env.COS_BUCKET_NAME }} -r ${{ env.COS_REGION }} -e ${{ env.COS_ENDPOINT_NAME }}
+        ./coscli config init -i ${{ secrets.TENCENT_SECRET_ID }} -k ${{ secrets.TENCENT_SECRET_KEY }}
+        ./coscli config add -b ${{ env.COS_BUCKET_NAME }} -r ${{ env.COS_REGION }} -e ${{ env.COS_ENDPOINT_NAME }}
       env:
         COS_REGION: ap-guangzhou
         COS_BUCKET_NAME: system-1302599754
