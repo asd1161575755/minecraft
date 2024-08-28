@@ -19,14 +19,15 @@ jobs:
 
     - name: Configure COS CLI
       run: |
-        ./coscli config set -i ${{ secrets.TENCENT_SECRET_ID }} -k ${{ secrets.TENCENT_SECRET_KEY }}
+        ./coscli config init -i ${{ secrets.TENCENT_SECRET_ID }} -k ${{ secrets.TENCENT_SECRET_KEY }} \
+        -b ${{ COS_BUCKET_NAME }} -r ${{ COS_REGION }} -e ${{COS_ENDPOINT_NAME}}
       env:
+        COS_REGION: ap-guangzhou
+        COS_BUCKET_NAME: system-1302599754
+        COS_ENDPOINT_NAME: cos.ap-guangzhou.myqcloud.com
         TENCENT_SECRET_ID: ${{ secrets.TENCENT_SECRET_ID }}
         TENCENT_SECRET_KEY: ${{ secrets.TENCENT_SECRET_KEY }}
 
     - name: Upload to Tencent COS
       run: |
         ./coscli cp -r ./expand cos://${{ env.COS_BUCKET_NAME }}/minecraft/
-      env:
-        COS_REGION: ap-guangzhou
-        COS_BUCKET_NAME: system-1302599754
