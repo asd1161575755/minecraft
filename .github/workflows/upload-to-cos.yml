@@ -1,9 +1,7 @@
 name: Upload to Tencent COS
 
 on: 
-  push:
-    branches:
-      - main-fabric
+  workflow_dispatch:
 
 jobs:
   upload_to_cos:
