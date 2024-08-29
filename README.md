@@ -123,7 +123,7 @@
    - **No Hostiles Around Campfire**: 篝火周围没有敌人
       - https://modrinth.com/mod/healing-campfire
    - **Despawning Eggs Hatch**: 干草块上产卵孵化
-      - https://modrinth.com/mod/healing-campfire
+      - https://modrinth.com/mod/despawning-eggs-hatch
    - **Your Items Are Safe**: 死亡墓碑
       - https://modrinth.com/mod/your-items-are-safe
    - **Toms Mobs**: 更多生物
