@@ -134,6 +134,8 @@
       - https://modrinth.com/mod/no-shield-delay
    - **Doors Closed**: 村民总是关门
       - https://modrinth.com/mod/doors-closed
+   - **Smarter Farmers**: 更聪明的农民
+      - https://modrinth.com/mod/smarter-farmers-farmers-replant
    
 ##### 客户端 
    - **Xaero's Minimap**: 地图
