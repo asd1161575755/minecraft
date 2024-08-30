@@ -130,6 +130,8 @@
       - https://modrinth.com/mod/toms-mobs
    - **funcy's more wandering trader trades**: 更多流浪交易者交易内容
       - https://modrinth.com/mod/funcys-wandering-trader
+   - **No Shield Delay**: 无护盾延迟
+      - https://modrinth.com/mod/no-shield-delay 
    
 ##### 客户端 
    - **Xaero's Minimap**: 地图
