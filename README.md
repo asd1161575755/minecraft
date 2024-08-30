@@ -106,10 +106,9 @@
 > [整合基础包](https://www.curseforge.com/minecraft/modpacks/fabulously-optimized)不存在的模组
 
 ##### 服务端
-   - **bad packets**: 允许在不同 Mod 平台之间进行数据包消息传递的库，一些模组会用到这个
-      - https://modrinth.com/mod/badpackets
    - **WTHIT**: 所见之物显示在HUB
      - https://modrinth.com/mod/wthit
+     - https://modrinth.com/mod/badpackets
    - **When Dungeons Arise**: 当地牢出现时
       - https://modrinth.com/mod/when-dungeons-arise
    - **Beautified Chat**: 美化聊天
@@ -134,8 +133,9 @@
       - https://modrinth.com/mod/no-shield-delay
    - **Doors Closed**: 村民总是关门
       - https://modrinth.com/mod/doors-closed
-   - **Smarter Farmers**: 更聪明的农民
+   - **Smarter Farmers**: 更聪明的农民 
       - https://modrinth.com/mod/smarter-farmers-farmers-replant
+      - https://www.curseforge.com/minecraft/mc-mods/selene
    
 ##### 客户端 
    - **Xaero's Minimap**: 地图
