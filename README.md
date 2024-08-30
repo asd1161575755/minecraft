@@ -131,7 +131,9 @@
    - **funcy's more wandering trader trades**: 更多流浪交易者交易内容
       - https://modrinth.com/mod/funcys-wandering-trader
    - **No Shield Delay**: 无护盾延迟
-      - https://modrinth.com/mod/no-shield-delay 
+      - https://modrinth.com/mod/no-shield-delay
+   - **Doors Closed**: 村民总是关门
+      - https://modrinth.com/mod/doors-closed
    
 ##### 客户端 
    - **Xaero's Minimap**: 地图
