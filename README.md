@@ -138,6 +138,8 @@
       - https://www.curseforge.com/minecraft/mc-mods/selene
    - **Vanilla Refresh**: 游戏环境质量扩展包
       - https://modrinth.com/datapack/vanilla-refresh
+   - **quad**: 以原版风格赋予玩家力量
+      - https://modrinth.com/mod/quad
    
 ##### 客户端 
    - **Xaero's Minimap**: 地图
