@@ -120,7 +120,7 @@
    - **Healing Campfire**: 治愈篝火
       - https://modrinth.com/mod/healing-campfire
    - **No Hostiles Around Campfire**: 篝火周围没有敌人
-      - https://modrinth.com/mod/healing-campfire
+      - https://modrinth.com/mod/no-hostiles-around-campfire
    - **Despawning Eggs Hatch**: 干草块上产卵孵化
       - https://modrinth.com/mod/despawning-eggs-hatch
    - **Your Items Are Safe**: 死亡墓碑
