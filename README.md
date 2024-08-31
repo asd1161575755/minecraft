@@ -136,6 +136,8 @@
    - **Smarter Farmers**: 更聪明的农民 
       - https://modrinth.com/mod/smarter-farmers-farmers-replant
       - https://www.curseforge.com/minecraft/mc-mods/selene
+   - **Vanilla Refresh**: 游戏环境质量扩展包
+      - https://modrinth.com/datapack/vanilla-refresh
    
 ##### 客户端 
    - **Xaero's Minimap**: 地图
