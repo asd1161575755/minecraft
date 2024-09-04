@@ -142,6 +142,10 @@
       - https://modrinth.com/mod/quad
    - **When Dungeons Arise: Seven Seas**: 当地牢出现时：七海
       - https://modrinth.com/mod/when-dungeons-arise-seven-seas
+   - **Additional Structures**: 添加 >200 个新结构
+      - https://modrinth.com/mod/additional-structures
+   - **Underground Bunkers**: 生成的废弃避难所
+      - https://modrinth.com/mod/underground-bunkers
    
 ##### 客户端 
    - **Xaero's Minimap**: 地图
