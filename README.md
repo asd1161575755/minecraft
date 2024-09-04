@@ -140,6 +140,8 @@
       - https://modrinth.com/datapack/vanilla-refresh
    - **quad**: 以原版风格赋予玩家力量
       - https://modrinth.com/mod/quad
+   - **When Dungeons Arise: Seven Seas**: 当地牢出现时：七海
+      - https://modrinth.com/mod/when-dungeons-arise-seven-seas
    
 ##### 客户端 
    - **Xaero's Minimap**: 地图
