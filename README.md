@@ -148,6 +148,8 @@
       - https://modrinth.com/mod/underground-bunkers
    - **Desert Scourge**: 沙漠天灾
       - https://modrinth.com/datapack/desert-scourge
+   - **Eternal Starlight**: 永恒的星光
+      - https://modrinth.com/mod/eternal-starlight
    
 ##### 客户端 
    - **Xaero's Minimap**: 地图
