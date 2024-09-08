@@ -150,6 +150,8 @@
       - https://modrinth.com/datapack/desert-scourge
    - **Eternal Starlight**: 永恒的星光
       - https://modrinth.com/mod/eternal-starlight
+   - **Arcana Novum**: 添加新物品和多方块（魔法）
+      - https://modrinth.com/mod/arcana-novum
    
 ##### 客户端 
    - **Xaero's Minimap**: 地图
