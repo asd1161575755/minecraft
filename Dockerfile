@@ -15,11 +15,11 @@ COPY server.properties .
 COPY fabric-api.jar /public/
 RUN echo "eula=true" > eula.txt
 
-# JVM针对2C4G机器
+# JVM针对2C6G机器
 ENV JVM_OPTS="\
 -server \
 -Xms1G \
--Xmx4G \
+-Xmx6G \
 -Xshare:auto \
 -XX:+UseTLAB \
 -XX:+UseG1GC \
