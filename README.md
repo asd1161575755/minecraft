@@ -146,6 +146,8 @@
       - https://modrinth.com/mod/additional-structures
    - **Underground Bunkers**: 生成的废弃避难所
       - https://modrinth.com/mod/underground-bunkers
+   - **Desert Scourge**: 沙漠天灾
+      - https://modrinth.com/datapack/desert-scourge
    
 ##### 客户端 
    - **Xaero's Minimap**: 地图
