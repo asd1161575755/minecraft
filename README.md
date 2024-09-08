@@ -152,6 +152,8 @@
       - https://modrinth.com/mod/eternal-starlight
    - **Arcana Novum**: 添加新物品和多方块（魔法）
       - https://modrinth.com/mod/arcana-novum
+   - **Wynn Weapon Bigger**: 背包中武器放大并展示
+      - https://modrinth.com/mod/wynnweaponbigger
    
 ##### 客户端 
    - **Xaero's Minimap**: 地图
