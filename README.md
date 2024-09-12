@@ -152,6 +152,8 @@
       - https://modrinth.com/mod/eternal-starlight
    - **Arcana Novum**: 添加新物品和多方块（魔法）
       - https://modrinth.com/mod/arcana-novum
+   - **ChoiceTheorem's Overhauled Village**: 更多村庄与前哨站
+      - https://modrinth.com/mod/ct-overhaul-village
    
 ##### 客户端 
    - **Xaero's Minimap**: 地图
