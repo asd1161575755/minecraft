@@ -154,6 +154,8 @@
       - https://modrinth.com/mod/arcana-novum
    - **ChoiceTheorem's Overhauled Village**: 更多村庄与前哨站
       - https://modrinth.com/mod/ct-overhaul-village
+   - **Lithostitched**: 平缝
+      - https://modrinth.com/mod/lithostitched
    
 ##### 客户端 
    - **Xaero's Minimap**: 地图
