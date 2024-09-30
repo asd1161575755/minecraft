@@ -160,6 +160,8 @@
       - https://modrinth.com/mod/ct-overhaul-village
    - **Lithostitched**: 平缝
       - https://modrinth.com/mod/lithostitched
+   - **Harvest with ease**: 右键收获
+      - https://modrinth.com/mod/harvest-with-ease
    
 ##### 客户端 
    - **Xaero's Minimap**: 地图
