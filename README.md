@@ -85,6 +85,8 @@
       - https://github.com/Wesley1808/ServerCore/releases
    - **Tick Stasis**: 当没有玩家在线时暂停您的 Minecraft 服务器，并在玩家加入时无缝恢复
       - https://modrinth.com/mod/tick-stasis
+   - **Faster Random**:  LXM 生成器加快世界生成
+      - https://modrinth.com/mod/faster-random
 ##### 客户端（推荐直接用[整合基础包](https://www.curseforge.com/minecraft/modpacks/fabulously-optimized)）
    - **Dynamic View**: 动态调整视距，不聚焦窗口时降低fps
       - https://modrinth.com/mod/dynamic-fps
