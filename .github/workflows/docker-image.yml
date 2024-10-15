@@ -53,7 +53,7 @@ jobs:
         # 打印信息
         echo "Using Minecraft version: $MINECRAFT_VERSION"
         echo "Using Forge version: $FORGE_VERSION"
-        echo "MINECRAFT_VERSION=$MINECRAFT_VERSION" >> $GITHUB_ENV
+        echo "MINECRAFT_VERSION=$SERVER_VERSION" >> $GITHUB_ENV
         echo "FORGE_VERSION=$FORGE_VERSION" >> $GITHUB_ENV
 
     # Step 5: 检查版本是否更新
@@ -89,7 +89,7 @@ jobs:
       if: env.BUILD_NEEDED == 'true'
       run: |
         # 下载 Forge Server
-        curl -fSL -o forge-installer.jar "https://maven.minecraftforge.net/net/minecraftforge/forge/$MINECRAFT_VERSION-$FORGE_VERSION/forge-$MINECRAFT_VERSION-$FORGE_VERSION-installer.jar"
+        curl -fSL -o forge-installer.jar "https://maven.minecraftforge.net/net/minecraftforge/forge/$SERVER_VERSION-$FORGE_VERSION/forge-$SERVER_VERSION-$FORGE_VERSION-installer.jar"
 
     # Step 7: 生成随机RCON密码
     - name: Generate random RCON password
