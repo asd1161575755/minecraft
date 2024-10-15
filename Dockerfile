@@ -65,4 +65,5 @@ RUN ln -sf /usr/share/zoneinfo/$TZ /etc/localtime \
     && echo $TZ > /etc/timezone
 
 Expose 25565
-ENTRYPOINT ["sh", "-c", "cp -r /public/* mods/ && java -jar ${JVM_OPTS} forge-server.jar --nogui --eraseCache --forceUpgrade --universe /data/"]
+# cp -r /public/* mods/ && 
+ENTRYPOINT ["sh", "-c", "java -jar ${JVM_OPTS} forge-server.jar --nogui --eraseCache --forceUpgrade --universe /data/"]
