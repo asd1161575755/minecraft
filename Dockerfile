@@ -1,9 +1,11 @@
 FROM eclipse-temurin:21-jre as builder
 WORKDIR server
 
-COPY server.jar server.jar
 COPY forge-installer.jar forge-installer.jar
 RUN java -jar forge-installer.jar --installServer
+RUN rm -rf server.properties eula.txt README.txt user_jvm_args.txt forge-installer.jar *.log run.bat run.sh && \
+    mv forge-*.jar forge-server.jar
+RUN mkdir -p /temp/cache && java -jar forge-server.jar --nogui --universe /temp/cache/
 
 ################################
 
@@ -11,8 +13,7 @@ FROM eclipse-temurin:21-jre
 WORKDIR server
 
 COPY --from=builder server .
-RUN rm -rf server.properties eula.txt README.txt user_jvm_args.txt forge-installer.jar *.log run.bat run.sh && \
-    mv forge-*.jar forge-server.jar
+RUN rm -rf server.properties eula.txt
 COPY server.properties .
 COPY fabric-api.jar /public/
 RUN echo "eula=true" > eula.txt
