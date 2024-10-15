@@ -89,7 +89,7 @@ jobs:
       if: env.BUILD_NEEDED == 'true'
       run: |
         # 下载 Forge Server
-        curl -fSL -o forge-installer.jar "https://maven.minecraftforge.net/net/minecraftforge/forge/$SERVER_VERSION-$FORGE_VERSION/forge-$SERVER_VERSION-$FORGE_VERSION-installer.jar"
+        curl -fSL -o forge-installer.jar "https://maven.minecraftforge.net/net/minecraftforge/forge/${{ env.SERVER_VERSION }}-${{ env.FORGE_VERSION }}/forge-${{ env.SERVER_VERSION }}-${{ env.FORGE_VERSION }}-installer.jar"
 
     # Step 7: 生成随机RCON密码
     - name: Generate random RCON password
