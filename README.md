@@ -29,5 +29,3 @@
   - 可选择
     1. 通过自有配置覆盖来修改密码
     2. 通过`docker exec -it minecraft-server cat /server/server.properties`查询密码
-
-### 默认模组信息预览
