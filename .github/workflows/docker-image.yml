@@ -111,7 +111,7 @@ jobs:
       if: env.BUILD_NEEDED == 'true'
       run: |
         if [ -n "${{ github.event.inputs.SERVER_VERSION }}" ]; then
-          echo "TAGS=fc6a1b03/minecraft-server-fabric:${{ github.event.inputs.SERVER_VERSION }}" >> $GITHUB_ENV
+          echo "TAGS=fc6a1b03/minecraft-server-forge:${{ github.event.inputs.SERVER_VERSION }}" >> $GITHUB_ENV
         else
           echo "TAGS=fc6a1b03/minecraft-server-forge:latest,fc6a1b03/minecraft-server-forge:${{ env.SERVER_VERSION }}" >> $GITHUB_ENV
         fi
