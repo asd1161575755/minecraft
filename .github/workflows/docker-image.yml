@@ -38,22 +38,22 @@ jobs:
         ALL_VERSIONS=$(curl -s $PROMOTION_FILE | jq -r '.promos | keys[]' | grep -oP '^[0-9]+\.[0-9]+(\.[0-9]+)?')
         if [ "${{ github.event.inputs.SERVER_VERSION }}" = "" ]; then
           # 如果输入版本号为空，找到最大版本号
-          MINECRAFT_VERSION=$(echo "$ALL_VERSIONS" | sort -V | tail -n 1)
+          SERVER_VERSION=$(echo "$ALL_VERSIONS" | sort -V | tail -n 1)
         else
           # 如果用户输入了版本号，则使用输入的版本号
-          MINECRAFT_VERSION=${{ github.event.inputs.SERVER_VERSION }}
+          SERVER_VERSION=${{ github.event.inputs.SERVER_VERSION }}
         fi
         # 获取对应 Minecraft 版本的最新 Forge 版本
-        FORGE_VERSION=$(curl -s $PROMOTION_FILE | jq -r --arg VER "$MINECRAFT_VERSION" '.promos[$VER + "-latest"]')
+        FORGE_VERSION=$(curl -s $PROMOTION_FILE | jq -r --arg VER "$SERVER_VERSION" '.promos[$VER + "-latest"]')
         # 如果找不到对应的 Forge 版本，则报错
         if [ "$FORGE_VERSION" = "null" ]; then
-          echo "Error: No Forge version available for Minecraft $MINECRAFT_VERSION"
+          echo "Error: No Forge version available for Minecraft $SERVER_VERSION"
           exit 1
         fi
         # 打印信息
-        echo "Using Minecraft version: $MINECRAFT_VERSION"
+        echo "Using Minecraft version: $SERVER_VERSION"
         echo "Using Forge version: $FORGE_VERSION"
-        echo "MINECRAFT_VERSION=$SERVER_VERSION" >> $GITHUB_ENV
+        echo "SERVER_VERSION=$SERVER_VERSION" >> $GITHUB_ENV
         echo "FORGE_VERSION=$FORGE_VERSION" >> $GITHUB_ENV
 
     # Step 5: 检查版本是否更新
