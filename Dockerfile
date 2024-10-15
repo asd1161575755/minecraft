@@ -15,7 +15,7 @@ WORKDIR server
 COPY --from=builder server .
 RUN rm -rf server.properties eula.txt
 COPY server.properties .
-COPY fabric-api.jar /public/
+# COPY fabric-api.jar /public/
 RUN echo "eula=true" > eula.txt
 
 # JVM针对2C6G机器
