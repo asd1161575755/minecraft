@@ -1,18 +1,27 @@
-FROM eclipse-temurin:21-jre
-
+FROM eclipse-temurin:21-jre as builder
 WORKDIR server
 
-Expose 25565
+COPY server.jar server.jar
+COPY forge-installer.jar forge-installer.jar
+RUN java -jar forge-installer.jar --installServer
 
-COPY server.jar .
+################################
+
+FROM eclipse-temurin:21-jre
+WORKDIR server
+
+COPY --from=builder server .
+RUN rm -rf server.properties eula.txt logs/* forge-installer.jar && \
+    mv forge-${MINECRAFT_VERSION}-${FORGE_VERSION}.jar forge-server.jar
 COPY server.properties .
+COPY fabric-api.jar /public/
 RUN echo "eula=true" > eula.txt
 
-# JVM针对2C2G机器
+# JVM针对2C6G机器
 ENV JVM_OPTS="\
 -server \
 -Xms1G \
--Xmx2G \
+-Xmx6G \
 -Xshare:auto \
 -XX:+UseTLAB \
 -XX:+UseG1GC \
@@ -51,8 +60,8 @@ ENV JVM_OPTS="\
 -XX:+UseStringDeduplication \
 -XX:+OptimizeStringConcat" \
     TZ=Asia/Shanghai
-
 RUN ln -sf /usr/share/zoneinfo/$TZ /etc/localtime \
     && echo $TZ > /etc/timezone
 
-ENTRYPOINT ["sh", "-c", "java -jar ${JVM_OPTS} server.jar --nogui --eraseCache --forceUpgrade --universe /data/"]
+Expose 25565
+ENTRYPOINT ["sh", "-c", "cp -r /public/* mods/ && java -jar ${JVM_OPTS} forge-server.jar --nogui --eraseCache --forceUpgrade --universe /data/"]
