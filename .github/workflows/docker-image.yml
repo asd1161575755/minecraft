@@ -15,14 +15,13 @@ jobs:
     steps:
       - name: 获取Forge版本信息
         run: |
-          url="https://files.minecraftforge.net/net/minecraftforge/forge/"
-          response=$(curl -s -f -v "$url")
+          response=$(curl -s "https://files.minecraftforge.net/net/minecraftforge/forge/")
           if [ $? -ne 0 ]; then
               echo "curl failed: $($?)"
               echo "$response"
               exit 1
           fi
-          minecraft_version=1.21.1 #或者其他版本
+          minecraft_version=${{ github.event.inputs.SERVER_VERSION }}
           #尝试更简单的正则表达式，先找到所有版本号
           versions=$(echo "$response" | grep -oE "${minecraft_version}/[0-9.]+/")
           if [ -z "$versions" ]; then
