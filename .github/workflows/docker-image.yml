@@ -16,19 +16,25 @@ jobs:
       - name: 获取Forge版本信息
         run: |
           url="https://files.minecraftforge.net/net/minecraftforge/forge/"
-          response=$(curl -s -f "$url")
+          response=$(curl -s -f -v "$url")
           if [ $? -ne 0 ]; then
-            echo "Failed to retrieve Forge version information"
-            exit 1
+              echo "curl failed: $($?)"
+              echo "$response"
+              exit 1
           fi
-          minecraft_version=${{ github.event.inputs.LATEST_VERSION }}
-          latest_forge_version=$(echo "$response" | grep -oP "(?<=${minecraft_version}/).*?(?=/)" | sort -V | tail -1)
-          if [ -z "$latest_forge_version" ]; then
-            echo "No Forge version found for Minecraft ${minecraft_version}"
-            exit 1
+          minecraft_version=1.21.1 #或者其他版本
+          #尝试更简单的正则表达式，先找到所有版本号
+          versions=$(echo "$response" | grep -oE "${minecraft_version}/[0-9.]+/")
+          if [ -z "$versions" ]; then
+              echo "No Forge version found for Minecraft ${minecraft_version}"
+              exit 1
           fi
-          latest_forge_url="${url}${minecraft_version}/${latest_forge_version}/forge-${minecraft_version}-${latest_forge_version}-installer.jar"
-          echo "最新Forge版本下载链接：${latest_forge_url=${latest_forge_url}"
+          
+          #提取版本号并排序，选择最新的
+          latest_version=$(echo "$versions" | sed 's/.*\///' | sort -V | tail -n 1)
+          
+          latest_forge_url="${url}${minecraft_version}/${latest_version}/forge-${minecraft_version}-${latest_version}-installer.jar"
+          echo "最新Forge版本下载链接：${latest_forge_url}"
         shell: bash
       - name: 输出最新Forge版本下载链接
         run: |
