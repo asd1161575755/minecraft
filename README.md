@@ -7,7 +7,7 @@
 2. 匹配版本，`-latest`左部分是`minecraft`版本号，需要什么对应版本拼接上去就行，可以排序下默认去最大的即可获得最新版本
 3. 请求完整`Forge`下载连接即可获得对应`Server`版本最新的`Forge`插件包
    - https://maven.minecraftforge.net/net/minecraftforge/forge/{server_version}-{forge_version}/forge-{server_version}-{forge_version}-installer.jar
-   - 
+
 ### 制作Dockerfile
 - [Dockerfile](Dockerfile)
 - docker build -t minecraft-server-forge .
