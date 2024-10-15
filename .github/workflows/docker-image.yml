@@ -3,39 +3,138 @@ name: Minecraft Docker Image CI
 on:
   workflow_dispatch:
     inputs:
-      LATEST_VERSION:
+      SERVER_VERSION:
         description: '要构建的Minecraft版本；只打版本镜像且会跳过`检查版本是否更新`和`记录最后构建版本`步骤'
         required: false
         default: ''
         type: string
-        
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
+    - uses: actions/checkout@v4
 
-      - name: Get Minecraft and Forge Versions
-        run: |
-          PROMOTION_FILE=https://files.minecraftforge.net/net/minecraftforge/forge/promotions_slim.json
-          # 获取 promotions_slim.json 中所有的版本信息
-          ALL_VERSIONS=$(curl -s $PROMOTION_FILE | jq -r '.promos | keys[]' | grep -oP '^[0-9]+\.[0-9]+(\.[0-9]+)?')
-          if [ "${{ github.event.inputs.LATEST_VERSION }}" = "" ]; then
-            # 如果输入版本号为空，找到最大版本号
-            MINECRAFT_VERSION=$(echo "$ALL_VERSIONS" | sort -V | tail -n 1)
+    # Step 1: 设置Docker Buildx
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
+    # Step 2: 为多平台构建安装QEMU
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v3
+
+    # Step 3: 登录 Docker Hub
+    - name: Login to Docker Hub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
+    # Step 4: 获取 Forge 相关版本信息
+    - name: Fetch Forge version info
+      run: |
+        PROMOTION_FILE=https://files.minecraftforge.net/net/minecraftforge/forge/promotions_slim.json
+        # 获取 promotions_slim.json 中所有的版本信息
+        ALL_VERSIONS=$(curl -s $PROMOTION_FILE | jq -r '.promos | keys[]' | grep -oP '^[0-9]+\.[0-9]+(\.[0-9]+)?')
+        if [ "${{ github.event.inputs.SERVER_VERSION }}" = "" ]; then
+          # 如果输入版本号为空，找到最大版本号
+          MINECRAFT_VERSION=$(echo "$ALL_VERSIONS" | sort -V | tail -n 1)
+        else
+          # 如果用户输入了版本号，则使用输入的版本号
+          MINECRAFT_VERSION=${{ github.event.inputs.SERVER_VERSION }}
+        fi
+        # 获取对应 Minecraft 版本的最新 Forge 版本
+        FORGE_VERSION=$(curl -s $PROMOTION_FILE | jq -r --arg VER "$MINECRAFT_VERSION" '.promos[$VER + "-latest"]')
+        # 如果找不到对应的 Forge 版本，则报错
+        if [ "$FORGE_VERSION" = "null" ]; then
+          echo "Error: No Forge version available for Minecraft $MINECRAFT_VERSION"
+          exit 1
+        fi
+        # 打印信息
+        echo "Using Minecraft version: $MINECRAFT_VERSION"
+        echo "Using Forge version: $FORGE_VERSION"
+        echo "MINECRAFT_VERSION=$MINECRAFT_VERSION" >> $GITHUB_ENV
+        echo "FORGE_VERSION=$FORGE_VERSION" >> $GITHUB_ENV
+
+    # Step 5: 检查版本是否更新
+    - name: Check if version is updated
+      id: check_version
+      run: |
+        # 检查是否手动输入了 SERVER_VERSION
+        if [ -z "${{ github.event.inputs.SERVER_VERSION }}" ]; then
+          # 尝试从`last_built_version.txt`中获取版本号
+          if [ -f last_built_version.txt ]; then
+            LAST_BUILT_VERSION=$(cat last_built_version.txt)
           else
-            # 如果用户输入了版本号，则使用输入的版本号
-            MINECRAFT_VERSION=${{ github.event.inputs.LATEST_VERSION }}
+            LAST_BUILT_VERSION="none"
           fi
-          # 获取对应 Minecraft 版本的最新 Forge 版本
-          FORGE_VERSION=$(curl -s $PROMOTION_FILE | jq -r --arg VER "$MINECRAFT_VERSION" '.promos[$VER + "-latest"]')
-          # 如果找不到对应的 Forge 版本，则报错
-          if [ "$FORGE_VERSION" = "null" ]; then
-            echo "Error: No Forge version available for Minecraft $MINECRAFT_VERSION"
-            exit 1
+          # 检查是否需要继续构建
+          if [ "$LAST_BUILT_VERSION" = "none" ]; then
+            # 没有旧版本时继续构建
+            echo "BUILD_NEEDED=true" >> $GITHUB_ENV
+          elif [ "$SERVER_VERSION" \> "$LAST_BUILT_VERSION" ]; then
+            # 如果新版本大于旧版本则继续构建
+            echo "BUILD_NEEDED=true" >> $GITHUB_ENV
+          else
+            # 如果新版本不大于旧版本则跳过构建
+            echo "BUILD_NEEDED=false" >> $GITHUB_ENV
           fi
-          # 打印信息
-          echo "Using Minecraft version: $MINECRAFT_VERSION"
-          echo "Using Forge version: $FORGE_VERSION"
-          echo "MINECRAFT_VERSION=$MINECRAFT_VERSION" >> $GITHUB_ENV
-          echo "FORGE_VERSION=$FORGE_VERSION" >> $GITHUB_ENV
+        else
+          # 手动输入版本则直接构建
+          echo "BUILD_NEEDED=true" >> $GITHUB_ENV
+        fi
+        
+    # Step 6: 下载 Forge Server
+    - name: Download Fabric server and API
+      if: env.BUILD_NEEDED == 'true'
+      run: |
+        # 下载 Forge Server
+        curl -fSL -o forge-installer.jar "https://maven.minecraftforge.net/net/minecraftforge/forge/$MINECRAFT_VERSION-$FORGE_VERSION/forge-$MINECRAFT_VERSION-$FORGE_VERSION-installer.jar"
+
+    # Step 7: 生成随机RCON密码
+    - name: Generate random RCON password
+      if: env.BUILD_NEEDED == 'true'
+      id: generate_password
+      run: |
+        RCON_PASSWORD=$(openssl rand -base64 30 | tr -dc 'A-Za-z0-9' | head -c 30)
+        echo "RCON_PASSWORD=$RCON_PASSWORD" >> $GITHUB_ENV
+
+    # Step 8: 将随机生成的密码写入 server.properties
+    - name: Update server.properties with RCON password
+      if: env.BUILD_NEEDED == 'true'
+      run: |
+        sed -i '/^rcon.password=/c\rcon.password=${{ env.RCON_PASSWORD }}' server.properties
+
+    # Step 10: 准备 Docker 镜像标签
+    - name: Prepare Docker tags
+      id: prepare_tags
+      if: env.BUILD_NEEDED == 'true'
+      run: |
+        if [ -n "${{ github.event.inputs.SERVER_VERSION }}" ]; then
+          echo "TAGS=fc6a1b03/minecraft-server-fabric:${{ github.event.inputs.SERVER_VERSION }}" >> $GITHUB_ENV
+        else
+          echo "TAGS=fc6a1b03/minecraft-server-forge:latest,fc6a1b03/minecraft-server-forge:${{ env.SERVER_VERSION }}" >> $GITHUB_ENV
+        fi
+    
+    # Step 11: 为多种架构构建和推送Docker镜像
+    - name: Build and push Docker image
+      if: env.BUILD_NEEDED == 'true'
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        push: true
+        tags: ${{ env.TAGS }}
+        platforms: linux/amd64,linux/arm64
+
+    # Step 12: 更新记录的最后构建版本
+    - name: Update last built version
+      if: env.BUILD_NEEDED == 'true' && github.event.inputs.SERVER_VERSION == ''
+      run: |
+        echo $SERVER_VERSION > last_built_version.txt
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git config --global user.name "github-actions[bot]"
+        git add last_built_version.txt
+        git commit -m "Update last built version to $SERVER_VERSION"
+        git push --force
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
