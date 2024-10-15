@@ -11,8 +11,8 @@ FROM eclipse-temurin:21-jre
 WORKDIR server
 
 COPY --from=builder server .
-RUN rm -rf server.properties eula.txt logs/* forge-installer.jar && \
-    mv forge-${MINECRAFT_VERSION}-${FORGE_VERSION}.jar forge-server.jar
+RUN rm -rf server.properties eula.txt README.txt user_jvm_args.txt forge-installer.jar *.log run.bat run.sh && \
+    mv forge-*.jar forge-server.jar
 COPY server.properties .
 COPY fabric-api.jar /public/
 RUN echo "eula=true" > eula.txt
