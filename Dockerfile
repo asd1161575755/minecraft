@@ -13,7 +13,7 @@ FROM eclipse-temurin:21-jre
 WORKDIR server
 
 COPY --from=builder server .
-RUN rm -rf server.properties eula.txt
+RUN rm -rf server.properties eula.txt logs/*
 COPY server.properties .
 # COPY fabric-api.jar /public/
 RUN echo "eula=true" > eula.txt
