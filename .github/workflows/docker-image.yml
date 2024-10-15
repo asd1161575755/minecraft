@@ -10,32 +10,44 @@ on:
         type: string
 
 jobs:
-  get_forge_version:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: 获取Forge版本信息
-        run: |
-          response=$(curl -s "https://files.minecraftforge.net/net/minecraftforge/forge/")
-          if [ $? -ne 0 ]; then
-              echo "curl failed: $($?)"
-              echo "$response"
-              exit 1
-          fi
-          minecraft_version=${{ github.event.inputs.SERVER_VERSION }}
-          #尝试更简单的正则表达式，先找到所有版本号
-          versions=$(echo "$response" | grep -oE "${minecraft_version}/[0-9.]+/")
-          if [ -z "$versions" ]; then
-              echo "No Forge version found for Minecraft ${minecraft_version}"
-              exit 1
-          fi
-          
-          #提取版本号并排序，选择最新的
-          latest_version=$(echo "$versions" | sed 's/.*\///' | sort -V | tail -n 1)
-          
-          latest_forge_url="${url}${minecraft_version}/${latest_version}/forge-${minecraft_version}-${latest_version}-installer.jar"
-          echo "最新Forge版本下载链接：${latest_forge_url}"
-        shell: bash
-      - name: 输出最新Forge版本下载链接
-        run: |
-          echo "最新Forge版本下载链接：${latest_forge_url}"
-        shell: bash
+    - name: Checkout this repository
+      uses: actions/checkout@v2
+
+    - name: Setup JDK 21
+      uses: actions/setup-java@v3
+      with:
+        java-version: '21'
+        distribution: 'adopt'
+
+    - name: Clone MinecraftForge Repository
+      run: |
+        git clone --depth 1 --recurse-submodules https://github.com/MinecraftForge/MinecraftForge.git
+
+    - name: Checkout MinecraftForge Version
+      run: |
+        cd MinecraftForge
+        git fetch --all --tags
+        MC_VERSION="${{ github.event.inputs.LATEST_VERSION }}"
+        # 检查是否存在与 Minecraft 版本对应的 Forge tag 分支
+        if git rev-parse "refs/tags/$MC_VERSION" >/dev/null 2>&1; then
+          git checkout "tags/$MC_VERSION"
+        else
+          echo "Version $MC_VERSION not found, exiting."
+          exit 1
+        fi
+
+    - name: Build MinecraftForge
+      run: |
+        cd MinecraftForge
+        ./gradlew setup
+        ./gradlew build
+
+    - name: Archive build artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: forge-jar
+        path: MinecraftForge/build/libs/*.jar
